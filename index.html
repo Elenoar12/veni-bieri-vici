@@ -67,7 +67,7 @@
                 </button>
             </form>
         </div>
-        <div class="absolute bottom-4 right-6 text-[10px] text-slate-400 font-medium">v5.3 STABLE</div>
+        <div class="absolute bottom-4 right-6 text-[10px] text-slate-400 font-medium">v5.4 STABLE</div>
     </div>
 
     <!-- Screen 2: Rules -->
@@ -149,15 +149,25 @@
 
     <!-- UI Overlay: Settings Modal -->
     <div id="settings-modal" class="hidden absolute inset-0 z-[4000] bg-slate-900/40 backdrop-blur-sm flex items-center justify-center px-4 transition-opacity">
-        <div class="bg-white rounded-2xl shadow-2xl p-6 max-w-sm w-full transform transition-all relative text-center">
+        <div class="bg-white rounded-2xl shadow-2xl p-6 max-w-sm w-full max-h-[90vh] overflow-y-auto custom-scrollbar transform transition-all relative text-center">
             <button id="btn-close-settings" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
             </button>
             <h3 class="text-xl font-bold text-slate-800 mb-6 uppercase tracking-tight">Settings</h3>
-            <div class="flex items-center gap-3 mb-6 p-4 bg-slate-50 rounded-xl border border-slate-200 text-left">
-                <div id="profile-color" class="w-5 h-5 rounded-full shadow-sm border-2 border-white"></div>
+            <div class="flex items-center gap-3 mb-4 p-4 bg-slate-50 rounded-xl border border-slate-200 text-left">
+                <div id="profile-color" class="w-5 h-5 rounded-full shadow-sm border-2 border-white transition-colors duration-300"></div>
                 <span id="profile-name" class="font-bold text-base text-slate-800 truncate"></span>
             </div>
+            
+            <!-- Color Picker -->
+            <div class="mb-6 bg-slate-50 p-4 rounded-xl border border-slate-200 text-left">
+                <h4 class="text-[10px] font-black text-slate-800 uppercase tracking-widest mb-3">Customise Color</h4>
+                <div id="color-picker-grid" class="flex flex-wrap gap-2">
+                    <!-- Colors rendered via JS -->
+                </div>
+                <p class="text-[10px] text-slate-500 mt-3 leading-tight"><span class="text-amber-500 font-bold">👑 Premium colors</span> are strictly exclusive and reserved for players who have achieved Rank #1.</p>
+            </div>
+
             <div class="flex flex-col gap-3 relative">
                 <button id="btn-show-rules" class="w-full py-3 text-sm font-bold text-blue-600 bg-blue-50 border border-blue-200 rounded-xl uppercase tracking-wide">Rules & Group Chat</button>
                 <button id="btn-logout" class="w-full py-3 text-sm font-bold text-slate-600 bg-slate-100 border border-slate-200 rounded-xl uppercase tracking-wide">Log Out</button>
@@ -328,7 +338,7 @@
         // ==========================================
         // 0. VERSION CACHE CONTROLLER
         // ==========================================
-        const CURRENT_VERSION = "v5.3";
+        const CURRENT_VERSION = "v5.4";
         const savedVersion = localStorage.getItem('bierisko_app_version');
         
         // If versions mismatch, clear heavy caches to force clean reload
@@ -344,13 +354,9 @@
         // ==========================================
         // 1. GLOBAL STATE & GLOBALS
         // ==========================================
-        // Expanded palette for 32 distinct players
-        const PALETTE = [
-            '#ef4444', '#3b82f6', '#10b981', '#a855f7', '#f59e0b', '#ec4899', '#06b6d4', '#84cc16',
-            '#f43f5e', '#8b5cf6', '#14b8a6', '#eab308', '#d946ef', '#0ea5e9', '#6366f1', '#f97316',
-            '#c026d3', '#0284c7', '#16a34a', '#ea580c', '#4f46e5', '#db2777', '#059669', '#d97706',
-            '#9f1239', '#4338ca', '#047857', '#b45309', '#6d28d9', '#0369a1', '#be185d', '#1d4ed8'
-        ];
+        
+        const PREMIUM_COLORS = ['#ef4444', '#3b82f6', '#22c55e', '#eab308', '#a855f7', '#f97316'];
+        const STANDARD_COLORS = ['#14b8a6', '#ec4899', '#06b6d4', '#84cc16', '#6366f1', '#0ea5e9', '#d946ef', '#f43f5e', '#10b981', '#f59e0b'];
         
         let map;
         let registeredUsers = {};
@@ -365,7 +371,6 @@
         let isInitialDataLoaded = false;
         let latestServerData = null; 
         
-        // NEW FAILSAFE: Controls if manual popup buttons are allowed to render
         let manualPlacementEnabled = false; 
         
         let rawCantonData = null;
@@ -400,6 +405,7 @@
         const btnCloseSettings = document.getElementById('btn-close-settings');
         const profileName = document.getElementById('profile-name');
         const profileColor = document.getElementById('profile-color');
+        const colorPickerGrid = document.getElementById('color-picker-grid');
         const btnLogout = document.getElementById('btn-logout');
         const btnUndo = document.getElementById('btn-undo');
         const undoHint = document.getElementById('undo-hint');
@@ -466,7 +472,6 @@
 
         const getUser = (userId) => registeredUsers[userId] || { id: userId, name: "Deleted Player", color: "#94a3b8" };
         
-        // Bulletproof ID and Name extractors
         const getGemeindeId = (f) => extProp(f, ['gem_no', 'com_code', 'com_id', 'BFS_NUMMER', 'id', 'gem_id'], getStableGeoId(f, 'gem'));
         const getGemeindeName = (f) => extProp(f, ['gem_name', 'com_name', 'name', 'NAME', 'gemeindename', 'nom_comm'], 'Unknown Gemeinde');
         const getCantonId = (f) => extProp(f, ['kan_no', 'ste_code', 'kan_code', 'id', 'kan_id'], getStableGeoId(f, 'can'));
@@ -493,7 +498,6 @@
             setTimeout(() => { toast.classList.add('-translate-y-20', 'opacity-0'); }, 4000);
         }
 
-        // EVENT SOURCING: Mathematically rebuild tokensState from history to prevent sync wipes
         function rebuildTokensFromHistory() {
             tokensState = {};
             tokenHistory.forEach(t => {
@@ -503,7 +507,74 @@
         }
 
         // ==========================================
-        // 4. SMART CACHE & RENDER ENGINE
+        // 4. COLOR PICKER ENGINE
+        // ==========================================
+        window.selectColor = function(hex) {
+            if (!currentUser) return;
+            currentUser.color = hex;
+            registeredUsers[currentUser.id].color = hex;
+            
+            document.getElementById('profile-color').style.backgroundColor = hex;
+            updateUIForUser();
+            refreshMapVisuals();
+            renderActivityBox();
+            updateLeaderboard();
+            renderColorPicker(); 
+            
+            if (isFirebaseReady) pushState(); 
+            showToast("Color updated!");
+        }
+
+        function renderColorPicker() {
+            if (!currentUser) return;
+            colorPickerGrid.innerHTML = '';
+            
+            const takenPremium = [];
+            Object.values(registeredUsers).forEach(u => {
+                if (u && u.id !== currentUser.id && PREMIUM_COLORS.includes(u.color)) {
+                    takenPremium.push(u.color);
+                }
+            });
+
+            const hasBeenRank1 = currentUser.highestRank === 1;
+
+            PREMIUM_COLORS.forEach(color => {
+                const isTaken = takenPremium.includes(color);
+                const isLocked = !hasBeenRank1 || isTaken;
+                const isSelected = currentUser.color === color;
+                
+                const btn = document.createElement('button');
+                btn.className = `w-7 h-7 rounded-full flex items-center justify-center border-2 transition-transform ${isSelected ? 'border-slate-800 scale-110 shadow-md' : 'border-transparent hover:scale-110'}`;
+                btn.style.backgroundColor = color;
+                
+                if (isLocked && !isSelected) {
+                    btn.style.opacity = '0.3';
+                    btn.style.cursor = 'not-allowed';
+                    btn.innerHTML = isTaken ? '🔒' : '👑';
+                    btn.style.fontSize = '10px';
+                } else {
+                    if (!isSelected) btn.onclick = () => window.selectColor(color);
+                }
+                colorPickerGrid.appendChild(btn);
+            });
+
+            const divider = document.createElement('div');
+            divider.className = "w-full h-px bg-slate-200 my-1";
+            colorPickerGrid.appendChild(divider);
+
+            STANDARD_COLORS.forEach(color => {
+                const isSelected = currentUser.color === color;
+                const btn = document.createElement('button');
+                btn.className = `w-7 h-7 rounded-full flex items-center justify-center border-2 transition-transform ${isSelected ? 'border-slate-800 scale-110 shadow-md' : 'border-transparent hover:scale-110'}`;
+                btn.style.backgroundColor = color;
+                
+                if (!isSelected) btn.onclick = () => window.selectColor(color);
+                colorPickerGrid.appendChild(btn);
+            });
+        }
+
+        // ==========================================
+        // 5. SMART CACHE & RENDER ENGINE
         // ==========================================
         function updateLayerStyle(layer, newStyle) {
             const styleStr = JSON.stringify(newStyle);
@@ -544,7 +615,6 @@
             }
         }
 
-        // Live updating the Popups if they are open during a sync
         function refreshMapVisuals() {
             if (gemeindeGeoJsonLayer) { 
                 gemeindeGeoJsonLayer.eachLayer(l => { 
@@ -566,7 +636,7 @@
         }
 
         // ==========================================
-        // 5. POPUP HTML GENERATORS
+        // 6. POPUP HTML GENERATORS
         // ==========================================
         function generateGemeindePopupContent(feature) {
             const id = getGemeindeId(feature); const name = getGemeindeName(feature); const info = gemeindeOwners[id] || { ownerId: null };
@@ -579,7 +649,6 @@
             const ownerStr = info.ownerId ? `<span style="color:${getUser(info.ownerId).color}" class="font-bold">${getUser(info.ownerId).name}</span>` : (!info.ownerId && info.totalTokens > 0) ? `<span class="text-slate-500 font-bold">Contested (Tie)</span>` : '<span class="text-slate-400">Unclaimed</span>';
             const safeGemId = id.replace(/'/g, "\\'");
             
-            // MANUAL PLACEMENT BUTTON: Only shows if manualPlacementEnabled = true
             const btnHTML = (currentUser && manualPlacementEnabled) ? `<button onclick="window.placeToken('${safeGemId}')" class="mt-4 w-full py-2.5 px-3 rounded-lg text-sm font-bold text-white shadow-md active:scale-95 transition-all" style="background-color: ${currentUser.color};">Drink Beer Here</button>` : '';
             
             return `<div class="border-b border-slate-200 pb-2 mb-2"><strong class="block text-lg mb-1 text-slate-800">${name}</strong><div class="text-xs text-slate-500 mb-0.5">Area: ${area} km²</div><div class="text-xs text-slate-500">Controlled By: ${ownerStr}</div></div><div><strong class="text-xs uppercase tracking-wider text-slate-400 mb-1 block">Tokens Placed</strong>${tokenRows}</div>${btnHTML}`;
@@ -597,7 +666,7 @@
         }
 
         // ==========================================
-        // 6. UI UPDATERS
+        // 7. UI UPDATERS
         // ==========================================
         function updateUIForUser() {
             if (currentUser) {
@@ -670,7 +739,6 @@
         window.showPlayerStats = function(pid) {
             const p = getUser(pid); 
             
-            // Build comparative stats to determine exact ranks
             const allStats = [];
             Object.keys(registeredUsers).forEach(uid => {
                 if(!registeredUsers[uid]) return;
@@ -682,7 +750,6 @@
 
             const myStats = allStats.find(s => s.uid === pid) || { c: 0, g: 0, t: 0, a: 0 };
             
-            // Rank calculations
             const getRank = (sortFn) => [...allStats].sort(sortFn).findIndex(s => s.uid === pid) + 1;
             const rCantons = getRank((x, y) => y.c - x.c || y.a - x.a);
             const rGemeinden = getRank((x, y) => y.g - x.g || y.t - x.t);
@@ -691,7 +758,6 @@
 
             const overallRank = rCantons;
 
-            // Registration Date Fallback Engine
             let regDate = p.registeredAt;
             if (!regDate) {
                 const userTokens = tokenHistory.filter(th => th.playerId === pid);
@@ -701,7 +767,6 @@
             const daysReg = Math.max(0, Math.floor((Date.now() - regDate) / (1000 * 60 * 60 * 24)));
             const highestRank = p.highestRank ? Math.min(p.highestRank, overallRank) : overallRank;
 
-            // Populate UI Elements
             document.getElementById('stat-modal-name').innerText = p.name; 
             document.getElementById('stat-modal-color').style.backgroundColor = p.color;
             
@@ -742,7 +807,7 @@
         }
 
         // ==========================================
-        // 7. GAME LOGIC ENGINE
+        // 8. GAME LOGIC ENGINE
         // ==========================================
         function calculateGameState() {
             gemeindeOwners = {}; cantonStats = {};
@@ -778,7 +843,7 @@
         }
 
         // ==========================================
-        // 8. SURGICAL FIREBASE SYNC ENGINE
+        // 9. SURGICAL FIREBASE SYNC ENGINE
         // ==========================================
         const firebaseConfig = {
             apiKey: "AIzaSyCfzl0RKiF0Yy8XXAZ0O20TEmDV5gogh9I",
@@ -851,7 +916,7 @@
         }
 
         // ==========================================
-        // 9. MAP INIT & FETCH FALLBACK
+        // 10. MAP INIT & FETCH FALLBACK
         // ==========================================
         async function fetchWithFallback(urls) {
             for (let url of urls) {
@@ -902,12 +967,10 @@
                     loaderText.innerText = "Indexing territories...";
                     for (const gem of rawGemeindeData.features) {
                         const id = getGemeindeId(gem);
-                        // Try fast path mapping first
                         if (gem.properties?.ste_code) {
                             gemToCantonMap[id] = String(gem.properties.ste_code);
                             continue;
                         }
-                        // Fallback to geometric mapping
                         try {
                             const pt = turf.pointOnFeature(gem);
                             for (const can of rawCantonData.features) { if (turf.booleanPointInPolygon(pt, can)) { gemToCantonMap[id] = getCantonId(can); break; } }
@@ -953,6 +1016,9 @@
             } catch(error) { loaderText.innerText = "Boot error. Please refresh."; console.error(error); }
         }
 
+        // ==========================================
+        // 11. TOKEN PLACEMENT & REPLAY
+        // ==========================================
         window.placeToken = function(id) {
             if (currentView !== 'gemeinde' || !currentUser || isReplaying) return;
             const prevGemTokens = gemeindeOwners[id]?.totalTokens || 0, prevGemOwner = gemeindeOwners[id]?.ownerId, prevCanOwner = cantonStats[gemToCantonMap[id]]?.ownerId;
@@ -995,7 +1061,7 @@
                 let canName = "Canton"; cantonGeoJsonLayer.eachLayer(l => { if(getCantonId(l.feature) === gemToCantonMap[id]) canName = getCantonName(l.feature); }); 
                 activityLog.push({ type: prevCanOwner === null ? 'claim_can' : 'conquer_can', playerId: currentUser.id, targetName: canName, timestamp: ts }); 
                 conqueredName = canName;
-                conqueredType = 'Canton'; // Overrides Gemeinde if both happened at the same time
+                conqueredType = 'Canton'; 
             }
             
             if (conqueredName) {
@@ -1013,7 +1079,6 @@
             if (unseen.length === 0) { currentUser.lastSeen = Date.now(); saveLocalUserLastSeen(); return; }
             isReplaying = true; replayOverlay.classList.remove('hidden');
             
-            // Rebuild history state missing the unseen
             const seenHistory = tokenHistory.filter(t => t.timestamp <= currentUser.lastSeen);
             tokensState = {};
             seenHistory.forEach(t => {
@@ -1038,18 +1103,18 @@
             }
             isReplaying = false; replayOverlay.classList.add('hidden');
             if (latestServerData) applyServerData(latestServerData);
-            currentUser.lastSeen = Date.now(); saveLocalUserLastSeen(); pushState(); // We are safe to push because pushState now ONLY uploads currentUser's tokens!
+            currentUser.lastSeen = Date.now(); saveLocalUserLastSeen(); pushState(); 
         }
 
         // ==========================================
-        // 10. DOM EVENT LISTENERS
+        // 12. DOM EVENT LISTENERS
         // ==========================================
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault(); const raw = loginInput.value.trim(), uid = raw.toLowerCase().replace(/[^a-z0-9]/g, ''); 
             if(!uid) return;
             if(!registeredUsers[uid]) { 
-                const cid = Object.keys(registeredUsers).filter(p => registeredUsers[p]).length % PALETTE.length;
-                registeredUsers[uid] = { id: uid, name: raw, color: PALETTE[cid], lastSeen: Date.now(), hasSeenUndoHint: false, registeredAt: Date.now(), highestRank: null };
+                const cid = Object.keys(registeredUsers).filter(p => registeredUsers[p]).length % STANDARD_COLORS.length;
+                registeredUsers[uid] = { id: uid, name: raw, color: STANDARD_COLORS[cid], lastSeen: Date.now(), hasSeenUndoHint: false, registeredAt: Date.now(), highestRank: null };
                 pushState();
             }
             localStorage.setItem('bierisko_username', raw); currentUser = registeredUsers[uid]; updateLocalUserLastSeen(); updateUIForUser();
@@ -1078,7 +1143,7 @@
                 }
                 btnGpsToken.innerHTML = orig; btnGpsToken.classList.remove('opacity-70', 'cursor-wait'); btnGpsToken.disabled = false;
             }, (err) => { 
-                if (err.code === 1) { // PERMISSION_DENIED
+                if (err.code === 1) { 
                     locationTutorialModal.classList.remove('hidden');
                 } else {
                     showToast("GPS Error. Manual placement unlocked.", true);
@@ -1100,7 +1165,11 @@
             undoHint.classList.add('hidden'); btnUndo.classList.remove('ring-4', 'ring-amber-400', 'animate-pulse'); showToast("Last beer placement undone."); calculateGameState(); renderActivityBox(); refreshMapVisuals(); pushState();
         });
 
-        btnSettings.addEventListener('click', () => settingsModal.classList.remove('hidden'));
+        btnSettings.addEventListener('click', () => {
+            renderColorPicker();
+            settingsModal.classList.remove('hidden');
+        });
+
         btnCloseSettings.addEventListener('click', () => { settingsModal.classList.add('hidden'); undoHint.classList.add('hidden'); btnUndo.classList.remove('ring-4', 'ring-amber-400', 'animate-pulse'); });
         btnShowRules.addEventListener('click', () => { tutorialModal.classList.remove('hidden'); settingsModal.classList.add('hidden'); });
         
