@@ -67,7 +67,7 @@
                 </button>
             </form>
         </div>
-        <div class="absolute bottom-4 right-6 text-[10px] text-slate-400 font-medium">v5.4 STABLE</div>
+        <div class="absolute bottom-4 right-6 text-[10px] text-slate-400 font-medium">v6.0 STABLE</div>
     </div>
 
     <!-- Screen 2: Rules -->
@@ -114,6 +114,16 @@
             <svg id="icon-view-gem" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
             <svg id="icon-view-can" class="hidden" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l3-3 6 3 9-3v12l-9 3-6-3-3 3V6z"/><path d="M12 6v12"/><path d="M6 3v12"/><path d="M18 9v12"/></svg>
         </button>
+        
+        <!-- ========================================== -->
+        <!-- START ACHIEVEMENTS MODULE HTML (Button)    -->
+        <!-- ========================================== -->
+        <button id="btn-achievements" class="bg-white/90 backdrop-blur-md flex items-center justify-center rounded-full shadow-lg border border-slate-200 text-amber-500 hover:text-amber-600 transition-colors pointer-events-auto active:scale-95 shrink-0 w-12 h-12" title="Achievements">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+        </button>
+        <!-- ========================================== -->
+        <!-- END ACHIEVEMENTS MODULE HTML               -->
+        <!-- ========================================== -->
     </div>
 
     <!-- UI Overlay: Leaderboard (Top Right) -->
@@ -181,6 +191,28 @@
             </div>
         </div>
     </div>
+
+    <!-- ========================================== -->
+    <!-- START ACHIEVEMENTS MODULE HTML (Modal)     -->
+    <!-- ========================================== -->
+    <div id="achievements-modal" class="hidden absolute inset-0 z-[4000] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center px-4 transition-opacity">
+        <div class="bg-white rounded-2xl shadow-2xl p-6 max-w-md w-full max-h-[90vh] flex flex-col transform transition-all relative text-center">
+            <button id="btn-close-achievements" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+            <h3 class="text-xl font-black text-slate-800 mb-2 uppercase tracking-tight flex items-center justify-center gap-2">
+                🏆 Achievements
+            </h3>
+            <p id="achievements-counter" class="text-xs font-bold text-blue-600 bg-blue-50 border border-blue-100 py-1 px-3 rounded-full inline-block mx-auto mb-4">0 / 22 Unlocked</p>
+            
+            <div id="achievements-grid" class="flex-1 overflow-y-auto pr-2 pb-2 grid grid-cols-2 gap-3 custom-scrollbar text-left">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </div>
+    <!-- ========================================== -->
+    <!-- END ACHIEVEMENTS MODULE HTML               -->
+    <!-- ========================================== -->
 
     <!-- UI Overlay: Location Permission Tutorial Modal -->
     <div id="location-tutorial-modal" class="hidden absolute inset-0 z-[6000] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center px-4 transition-opacity">
@@ -338,7 +370,7 @@
         // ==========================================
         // 0. VERSION CACHE CONTROLLER
         // ==========================================
-        const CURRENT_VERSION = "v5.4";
+        const CURRENT_VERSION = "v6.0";
         const savedVersion = localStorage.getItem('bierisko_app_version');
         
         // If versions mismatch, clear heavy caches to force clean reload
@@ -354,9 +386,8 @@
         // ==========================================
         // 1. GLOBAL STATE & GLOBALS
         // ==========================================
-        
         const PREMIUM_COLORS = ['#ef4444', '#3b82f6', '#22c55e', '#eab308', '#a855f7', '#f97316'];
-        const STANDARD_COLORS = ['#14b8a6', '#ec4899', '#06b6d4', '#84cc16', '#6366f1', '#0ea5e9', '#d946ef', '#f43f5e', '#10b981', '#f59e0b'];
+        const STANDARD_COLORS = ['#14b8a6', '#ec4899', '#06b6d4', '#84cc16', '#6366f1', '#0ea5e9', '#d946ef', '#f43f5e', '#10b981', '#f59e0b', '#c026d3', '#0284c7', '#16a34a', '#ea580c', '#4f46e5', '#db2777', '#059669', '#d97706', '#9f1239', '#4338ca', '#047857', '#b45309', '#6d28d9', '#0369a1', '#be185d', '#1d4ed8'];
         
         let map;
         let registeredUsers = {};
@@ -432,6 +463,248 @@
         const celebrationMessage = document.getElementById('celebration-message');
 
         // ==========================================
+        // --- START ACHIEVEMENTS MODULE JS ---
+        // ==========================================
+        const btnAchievements = document.getElementById('btn-achievements');
+        const achievementsModal = document.getElementById('achievements-modal');
+        const btnCloseAchievements = document.getElementById('btn-close-achievements');
+        const achievementsGrid = document.getElementById('achievements-grid');
+        const achievementsCounter = document.getElementById('achievements-counter');
+
+        const ACHIEVEMENTS_DEF = [
+            // Starter / Easy
+            { id: 'first_blood', icon: '🩸', name: 'First Blood', desc: 'Place your very first token.' },
+            { id: 'morning_pint', icon: '🌅', name: 'Frühschoppen', desc: 'Log a beer between 6:00 AM and 10:00 AM.' },
+            { id: 'night_owl', icon: '🦉', name: 'Night Owl', desc: 'Log a beer between 3:00 AM and 5:00 AM.' },
+            { id: 'capital_drinker', icon: '🐻', name: 'Capital Drinker', desc: 'Claim the capital (Gemeinde Bern).' },
+            
+            // Medium
+            { id: '10_beers_day', icon: '🧽', name: 'The Sponge', desc: 'Drink 10 beers in a single day.' },
+            { id: 'weekend_warrior', icon: '🍺', name: 'Weekend Warrior', desc: 'Log 15 beers in a single weekend (Sat/Sun).' },
+            { id: '7_day_streak', icon: '🏃', name: 'Marathon', desc: 'Maintain a 7-day drinking streak.' },
+            { id: 'centurion', icon: '💯', name: 'Centurion', desc: 'Place 100 total tokens on the map.' },
+            { id: '1_month_sober', icon: '🐪', name: 'Dry January', desc: 'Survive 30 days without logging a beer.' },
+            { id: '3_gem_day', icon: '🚜', name: 'Town Terror', desc: 'Conquer 3 Gemeinden in a single day.' },
+            { id: '2_can_day', icon: '⚔️', name: 'Canton Crusher', desc: 'Conquer 2 Cantons in a single day.' },
+            
+            // Hard
+            { id: '4_gem_day', icon: '🎩', name: 'Mayor of Chaos', desc: 'Conquer 4 Gemeinden in a single day.' },
+            { id: '3_can_day', icon: '🇨🇭', name: 'Swiss Warlord', desc: 'Conquer 3 Cantons in a single day.' },
+            { id: 'teleporter', icon: '🛸', name: 'Teleporter', desc: 'Conquer 2 Gemeinden >100km apart in 1 day.' },
+            { id: '100_tokens_gem', icon: '🏠', name: 'Stammgast', desc: 'Have over 100 active tokens on a single Gemeinde.' },
+            { id: 'longest_name', icon: '📜', name: 'Linguist', desc: 'Claim the claimed Gemeinde with the longest name.' },
+            { id: 'shortest_name', icon: '🤏', name: 'Tiny Town', desc: 'Claim the claimed Gemeinde with the shortest name.' },
+            { id: 'rank_1', icon: '👑', name: 'The King', desc: 'Reach Rank #1 on the Leaderboard.' },
+            
+            // Legendary
+            { id: 'monk_mode', icon: '🧘', name: 'Monk Mode', desc: 'Survive 90 days without logging a beer.' },
+            { id: 'all_cantons', icon: '🚂', name: 'Globetrotter', desc: 'Place a token in all 26 Cantons.' },
+            { id: 'long_reign', icon: '🏰', name: 'Long May He Reign', desc: 'Be in 1st place for 30 consecutive days.' },
+            { id: 'monopoly', icon: '🧀', name: 'Monopoly', desc: 'Conquer EVERY Gemeinde in a single Canton.' },
+            { id: '30_day_streak', icon: '🌋', name: 'Unstoppable', desc: 'Maintain a 30-day drinking streak.' }
+        ];
+
+        function checkAchievements() {
+            if (!currentUser || isReplaying || !rawGemeindeData) return;
+            if (!currentUser.achievements) currentUser.achievements = {};
+            
+            let unlockedAny = false;
+            const now = Date.now();
+            const myTokens = tokenHistory.filter(t => t.playerId === currentUser.id);
+            const myActivities = activityLog.filter(l => l.playerId === currentUser.id);
+            
+            const unlock = (id) => {
+                if (!currentUser.achievements[id]) {
+                    currentUser.achievements[id] = now;
+                    unlockedAny = true;
+                    showToast(`🏆 Achievement Unlocked: ${ACHIEVEMENTS_DEF.find(a=>a.id===id).name}!`);
+                }
+            };
+
+            if (myTokens.length === 0) return;
+
+            // 1. Basic Quantity
+            unlock('first_blood');
+            if (myTokens.length >= 100) unlock('centurion');
+
+            // 2. Streaks and Time Gaps
+            const daysSinceLast = (now - myTokens[myTokens.length-1].timestamp) / (1000*60*60*24);
+            if (daysSinceLast >= 30) unlock('1_month_sober');
+            if (daysSinceLast >= 90) unlock('monk_mode');
+
+            if (currentUser.highestRank === 1) unlock('rank_1');
+            if (currentUser.rank1Since && (now - currentUser.rank1Since) >= (30*24*60*60*1000)) unlock('long_reign');
+
+            // 3. Time, Days, and Streaks Iteration
+            const tokensPerDay = {};
+            const gemsConqueredPerDay = {};
+            const cansConqueredPerDay = {};
+            const activeDays = new Set();
+            let cantonsVisited = new Set();
+            const weekCounts = {};
+
+            myTokens.forEach(t => {
+                const dateObj = new Date(t.timestamp);
+                const d = dateObj.toDateString();
+                const hour = dateObj.getHours();
+
+                tokensPerDay[d] = (tokensPerDay[d] || 0) + 1;
+                activeDays.add(d);
+                if (gemToCantonMap[t.gemId]) cantonsVisited.add(gemToCantonMap[t.gemId]);
+                
+                if (hour >= 6 && hour < 10) unlock('morning_pint');
+                if (hour >= 3 && hour < 5) unlock('night_owl');
+
+                if (dateObj.getDay() === 0 || dateObj.getDay() === 6) {
+                    const monday = new Date(dateObj);
+                    monday.setDate(dateObj.getDate() - (dateObj.getDay() === 0 ? 6 : dateObj.getDay() - 1));
+                    monday.setHours(0,0,0,0);
+                    const wKey = monday.getTime();
+                    weekCounts[wKey] = (weekCounts[wKey] || 0) + 1;
+                }
+            });
+
+            myActivities.forEach(a => {
+                const d = new Date(a.timestamp).toDateString();
+                if (a.type.includes('conquer_gem') || a.type.includes('claim_gem')) {
+                    if (!gemsConqueredPerDay[d]) gemsConqueredPerDay[d] = [];
+                    gemsConqueredPerDay[d].push(a.targetName);
+                }
+                if (a.type.includes('conquer_can') || a.type.includes('claim_can')) {
+                    if (!cansConqueredPerDay[d]) cansConqueredPerDay[d] = [];
+                    cansConqueredPerDay[d].push(a.targetName);
+                }
+            });
+
+            // Evaluate Daily Limits
+            Object.values(tokensPerDay).forEach(count => { if(count >= 10) unlock('10_beers_day'); });
+            Object.values(weekCounts).forEach(c => { if(c >= 15) unlock('weekend_warrior'); });
+            
+            Object.values(gemsConqueredPerDay).forEach(arr => {
+                if (arr.length >= 3) unlock('3_gem_day');
+                if (arr.length >= 4) unlock('4_gem_day');
+            });
+            Object.values(cansConqueredPerDay).forEach(arr => {
+                if (arr.length >= 2) unlock('2_can_day');
+                if (arr.length >= 3) unlock('3_can_day');
+            });
+
+            if (cantonsVisited.size === 26) unlock('all_cantons');
+
+            // Streak Tracking
+            let maxStreak = 0; let curStreak = 0; let lastDay = null;
+            Array.from(activeDays).map(d => new Date(d)).sort((a,b)=>a-b).forEach(date => {
+                if (!lastDay) { curStreak = 1; } 
+                else {
+                    const diffDays = Math.round((date - lastDay)/(1000*60*60*24));
+                    if (diffDays === 1) curStreak++; else if (diffDays > 1) curStreak = 1;
+                }
+                if (curStreak > maxStreak) maxStreak = curStreak;
+                lastDay = date;
+            });
+            if (maxStreak >= 7) unlock('7_day_streak');
+            if (maxStreak >= 30) unlock('30_day_streak');
+
+            // 4. Map Control & Distances
+            let globalLongest = 0; let globalShortest = 999;
+            let myLongest = 0; let myShortest = 999;
+            const gemCountPerCanton = {};
+            const myConqueredGemsPerCanton = {};
+
+            Object.keys(tokensState).forEach(gemId => {
+                if (tokensState[gemId][currentUser.id] >= 100) unlock('100_tokens_gem');
+                
+                const owner = gemeindeOwners[gemId]?.ownerId;
+                const canId = gemToCantonMap[gemId];
+                if (canId) {
+                    gemCountPerCanton[canId] = (gemCountPerCanton[canId] || 0) + 1;
+                    if (owner === currentUser.id) myConqueredGemsPerCanton[canId] = (myConqueredGemsPerCanton[canId] || 0) + 1;
+                }
+
+                if (owner) {
+                    const f = rawGemeindeData.features.find(feat => getGemeindeId(feat) === gemId);
+                    if (f) {
+                        const name = getGemeindeName(f);
+                        if (name === 'Bern' && owner === currentUser.id) unlock('capital_drinker');
+                        
+                        const nameLen = name.length;
+                        if (nameLen > globalLongest) globalLongest = nameLen;
+                        if (nameLen < globalShortest) globalShortest = nameLen;
+                        
+                        if (owner === currentUser.id) {
+                            if (nameLen > myLongest) myLongest = nameLen;
+                            if (nameLen < myShortest) myShortest = nameLen;
+                        }
+                    }
+                }
+            });
+
+            Object.keys(gemCountPerCanton).forEach(canId => {
+                if (gemCountPerCanton[canId] >= 3 && myConqueredGemsPerCanton[canId] === gemCountPerCanton[canId]) unlock('monopoly');
+            });
+
+            if (myLongest > 0 && myLongest === globalLongest) unlock('longest_name');
+            if (myShortest < 999 && myShortest === globalShortest) unlock('shortest_name');
+
+            if (!currentUser.achievements['teleporter']) {
+                Object.keys(gemsConqueredPerDay).forEach(d => {
+                    if (gemsConqueredPerDay[d].length >= 2) {
+                        const feats = rawGemeindeData.features.filter(f => gemsConqueredPerDay[d].includes(getGemeindeName(f)));
+                        if (feats.length >= 2) {
+                            try {
+                                const pt1 = turf.centroid(feats[0]);
+                                const pt2 = turf.centroid(feats[feats.length-1]);
+                                if (turf.distance(pt1, pt2, {units: 'kilometers'}) >= 100) unlock('teleporter');
+                            } catch(e){}
+                        }
+                    }
+                });
+            }
+
+            if (unlockedAny) {
+                renderAchievements();
+                if (isFirebaseReady) pushState();
+            }
+        }
+
+        function renderAchievements() {
+            if (!currentUser) return;
+            if (!currentUser.achievements) currentUser.achievements = {};
+            
+            achievementsGrid.innerHTML = '';
+            let unlockedCount = 0;
+
+            ACHIEVEMENTS_DEF.forEach(def => {
+                const isUnlocked = !!currentUser.achievements[def.id];
+                if (isUnlocked) unlockedCount++;
+
+                const card = document.createElement('div');
+                card.className = `p-3 rounded-xl border flex flex-col gap-1 transition-all ${isUnlocked ? 'bg-amber-50 border-amber-200' : 'bg-slate-50 border-slate-200 opacity-60 grayscale'}`;
+                
+                card.innerHTML = `
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-2xl">${def.icon}</span>
+                        ${isUnlocked ? '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>' : '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>'}
+                    </div>
+                    <strong class="text-xs text-slate-800 leading-tight">${def.name}</strong>
+                    <p class="text-[9px] text-slate-500 leading-tight">${def.desc}</p>
+                `;
+                achievementsGrid.appendChild(card);
+            });
+
+            achievementsCounter.innerText = `${unlockedCount} / ${ACHIEVEMENTS_DEF.length} Unlocked`;
+        }
+
+        btnAchievements.addEventListener('click', () => {
+            renderAchievements();
+            achievementsModal.classList.remove('hidden');
+        });
+        btnCloseAchievements.addEventListener('click', () => achievementsModal.classList.add('hidden'));
+        // ==========================================
+        // --- END ACHIEVEMENTS MODULE JS ---
+        // ==========================================
+
+        // ==========================================
         // 3. UTILITIES & EVENT SOURCING
         // ==========================================
         window.switchLang = function(lang) {
@@ -493,7 +766,7 @@
             const toast = document.getElementById('toast');
             const toastMsg = document.getElementById('toast-msg');
             toastMsg.innerText = message;
-            toast.style.backgroundColor = isError ? '#ef4444' : '#1e293b'; 
+            toast.style.backgroundColor = isError ? '#ef4444' : (message.includes('🏆') ? '#d97706' : '#1e293b'); 
             toast.classList.remove('-translate-y-20', 'opacity-0');
             setTimeout(() => { toast.classList.add('-translate-y-20', 'opacity-0'); }, 4000);
         }
@@ -617,20 +890,13 @@
 
         function refreshMapVisuals() {
             if (gemeindeGeoJsonLayer) { 
-                gemeindeGeoJsonLayer.eachLayer(l => { 
-                    updateLayerStyle(l, getGemeindeStyle(l.feature)); 
-                    updateGemeindeLabel(l); 
-                    if (l.isPopupOpen()) {
-                        l.setPopupContent(generateGemeindePopupContent(l.feature));
-                    }
+                gemeindeGeoJsonLayer.eachLayer(l => { updateLayerStyle(l, getGemeindeStyle(l.feature)); updateGemeindeLabel(l); 
+                    if (l.isPopupOpen()) l.setPopupContent(generateGemeindePopupContent(l.feature));
                 }); 
             }
             if (cantonGeoJsonLayer) { 
-                cantonGeoJsonLayer.eachLayer(l => { 
-                    updateLayerStyle(l, getCantonStyle(l.feature)); 
-                    if (l.isPopupOpen()) {
-                        l.setPopupContent(generateCantonPopupContent(l.feature));
-                    }
+                cantonGeoJsonLayer.eachLayer(l => { updateLayerStyle(l, getCantonStyle(l.feature)); 
+                    if (l.isPopupOpen()) l.setPopupContent(generateCantonPopupContent(l.feature));
                 }); 
             }
         }
@@ -721,6 +987,21 @@
                     currentUser.highestRank = myRank;
                     registeredUsers[currentUser.id].highestRank = myRank;
                     if (isFirebaseReady && !isReplaying) pushState();
+                }
+                
+                // Track consecutive days as rank 1 for Achievements
+                if (myRank === 1) {
+                    if (!currentUser.rank1Since) {
+                        currentUser.rank1Since = Date.now();
+                        registeredUsers[currentUser.id].rank1Since = currentUser.rank1Since;
+                        if (isFirebaseReady && !isReplaying) pushState();
+                    }
+                } else {
+                    if (currentUser.rank1Since) {
+                        currentUser.rank1Since = null;
+                        registeredUsers[currentUser.id].rank1Since = null;
+                        if (isFirebaseReady && !isReplaying) pushState();
+                    }
                 }
             }
 
@@ -863,11 +1144,20 @@
         async function pushState() {
             if (!isFirebaseReady || !isInitialDataLoaded || !currentUser) return;
             
+            // SURGICAL PUSH
+            let myTokens = {};
+            for (let gem in tokensState) {
+                if (tokensState[gem][currentUser.id] !== undefined) {
+                    myTokens[gem] = { [currentUser.id]: tokensState[gem][currentUser.id] };
+                }
+            }
+            
             let myUser = { [currentUser.id]: registeredUsers[currentUser.id] };
 
             try { 
                 await setDoc(stateRef, { 
                     users: myUser, 
+                    tokens: myTokens, 
                     activityLog: activityLog.slice(-1000), 
                     tokenHistory: tokenHistory.slice(-5000) 
                 }, { merge: true }); 
@@ -883,7 +1173,7 @@
             rebuildTokensFromHistory();
             
             if (currentUser && registeredUsers[currentUser.id]) currentUser = registeredUsers[currentUser.id];
-            calculateGameState(); renderActivityBox(); refreshMapVisuals();
+            calculateGameState(); renderActivityBox(); refreshMapVisuals(); checkAchievements();
         }
 
         function unlockUIAndAutoLogin() {
@@ -920,12 +1210,7 @@
         // ==========================================
         async function fetchWithFallback(urls) {
             for (let url of urls) {
-                try {
-                    let res = await fetch(url);
-                    if (res.ok) return await res.json();
-                } catch (e) {
-                    console.warn(`Fetch failed for ${url}`, e);
-                }
+                try { let res = await fetch(url); if (res.ok) return await res.json(); } catch (e) { console.warn(`Fetch failed for ${url}`, e); }
             }
             throw new Error("All fetch attempts failed");
         }
@@ -967,10 +1252,7 @@
                     loaderText.innerText = "Indexing territories...";
                     for (const gem of rawGemeindeData.features) {
                         const id = getGemeindeId(gem);
-                        if (gem.properties?.ste_code) {
-                            gemToCantonMap[id] = String(gem.properties.ste_code);
-                            continue;
-                        }
+                        if (gem.properties?.ste_code) { gemToCantonMap[id] = String(gem.properties.ste_code); continue; }
                         try {
                             const pt = turf.pointOnFeature(gem);
                             for (const can of rawCantonData.features) { if (turf.booleanPointInPolygon(pt, can)) { gemToCantonMap[id] = getCantonId(can); break; } }
@@ -1061,7 +1343,7 @@
                 let canName = "Canton"; cantonGeoJsonLayer.eachLayer(l => { if(getCantonId(l.feature) === gemToCantonMap[id]) canName = getCantonName(l.feature); }); 
                 activityLog.push({ type: prevCanOwner === null ? 'claim_can' : 'conquer_can', playerId: currentUser.id, targetName: canName, timestamp: ts }); 
                 conqueredName = canName;
-                conqueredType = 'Canton'; 
+                conqueredType = 'Canton'; // Overrides Gemeinde if both happened at the same time
             }
             
             if (conqueredName) {
@@ -1070,7 +1352,7 @@
             }
 
             if (!currentUser.hasSeenUndoHint) { currentUser.hasSeenUndoHint = true; saveLocalUserLastSeen(); setTimeout(() => { settingsModal.classList.remove('hidden'); undoHint.classList.remove('hidden'); btnUndo.classList.add('ring-4', 'ring-amber-400', 'animate-pulse'); }, 1000); }
-            currentUser.lastSeen = ts; saveLocalUserLastSeen(); renderActivityBox(); refreshMapVisuals(); pushState(); 
+            currentUser.lastSeen = ts; saveLocalUserLastSeen(); renderActivityBox(); refreshMapVisuals(); checkAchievements(); pushState(); 
         };
 
         async function checkAndRunReplay() {
@@ -1113,14 +1395,15 @@
             e.preventDefault(); const raw = loginInput.value.trim(), uid = raw.toLowerCase().replace(/[^a-z0-9]/g, ''); 
             if(!uid) return;
             if(!registeredUsers[uid]) { 
-                const cid = Object.keys(registeredUsers).filter(p => registeredUsers[p]).length % STANDARD_COLORS.length;
-                registeredUsers[uid] = { id: uid, name: raw, color: STANDARD_COLORS[cid], lastSeen: Date.now(), hasSeenUndoHint: false, registeredAt: Date.now(), highestRank: null };
+                const cid = Object.keys(registeredUsers).filter(p => registeredUsers[p]).length % PALETTE.length;
+                registeredUsers[uid] = { id: uid, name: raw, color: PALETTE[cid], lastSeen: Date.now(), hasSeenUndoHint: false, registeredAt: Date.now(), highestRank: null };
                 pushState();
             }
             localStorage.setItem('bierisko_username', raw); currentUser = registeredUsers[uid]; updateLocalUserLastSeen(); updateUIForUser();
             profileName.innerText = currentUser.name; profileColor.style.backgroundColor = currentUser.color;
             loginScreen.style.opacity = '0'; setTimeout(() => loginScreen.style.visibility = 'hidden', 400);
             calculateGameState(); renderActivityBox(); if (!currentUser.lastSeen || currentUser.lastSeen < 1) tutorialModal.classList.remove('hidden'); else checkAndRunReplay();
+            checkAchievements();
         });
 
         loginInput.addEventListener('input', (e) => {
