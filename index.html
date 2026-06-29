@@ -67,7 +67,7 @@
                 </button>
             </form>
         </div>
-        <div class="absolute bottom-4 right-6 text-[10px] text-slate-400 font-medium">v6.0 STABLE</div>
+        <div class="absolute bottom-4 right-6 text-[10px] text-slate-400 font-medium">v5.7 STABLE</div>
     </div>
 
     <!-- Screen 2: Rules -->
@@ -107,23 +107,16 @@
 
     <!-- UI Overlay: Top Controls -->
     <div class="absolute top-4 left-4 sm:left-6 sm:top-6 z-[2000] flex flex-col gap-2 pointer-events-none">
-        <button id="btn-settings" class="bg-white/90 backdrop-blur-md flex items-center justify-center rounded-full shadow-lg border border-slate-200 text-slate-600 hover:text-blue-600 transition-colors pointer-events-auto active:scale-95 shrink-0 w-12 h-12" title="Settings">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1-1-1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+        <button id="btn-achievements" class="bg-white/90 backdrop-blur-md flex items-center justify-center rounded-full shadow-lg border border-amber-200 text-amber-500 hover:text-amber-600 hover:scale-105 transition-all pointer-events-auto active:scale-95 flex-none w-12 h-12 min-w-[3rem] min-h-[3rem] aspect-square" title="Achievements">
+            <span class="text-xl leading-none">🏆</span>
         </button>
-        <button id="btn-toggle-view" class="bg-white/90 backdrop-blur-md flex items-center justify-center rounded-full shadow-lg border border-slate-200 text-blue-600 hover:text-blue-700 transition-colors pointer-events-auto active:scale-95 shrink-0 w-12 h-12" title="Toggle View">
-            <svg id="icon-view-gem" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
-            <svg id="icon-view-can" class="hidden" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l3-3 6 3 9-3v12l-9 3-6-3-3 3V6z"/><path d="M12 6v12"/><path d="M6 3v12"/><path d="M18 9v12"/></svg>
+        <button id="btn-settings" class="bg-white/90 backdrop-blur-md flex items-center justify-center rounded-full shadow-lg border border-slate-200 text-slate-600 hover:text-blue-600 transition-colors pointer-events-auto active:scale-95 flex-none w-12 h-12 min-w-[3rem] min-h-[3rem] aspect-square" title="Settings">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43-.25a2 2 0 0 1-1-1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
         </button>
-        
-        <!-- ========================================== -->
-        <!-- START ACHIEVEMENTS MODULE HTML (Button)    -->
-        <!-- ========================================== -->
-        <button id="btn-achievements" class="bg-white/90 backdrop-blur-md flex items-center justify-center rounded-full shadow-lg border border-slate-200 text-amber-500 hover:text-amber-600 transition-colors pointer-events-auto active:scale-95 shrink-0 w-12 h-12" title="Achievements">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+        <button id="btn-toggle-view" class="bg-white/90 backdrop-blur-md flex items-center justify-center rounded-full shadow-lg border border-slate-200 text-blue-600 hover:text-blue-700 transition-colors pointer-events-auto active:scale-95 flex-none w-12 h-12 min-w-[3rem] min-h-[3rem] aspect-square" title="Toggle View">
+            <svg id="icon-view-gem" class="shrink-0" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+            <svg id="icon-view-can" class="hidden shrink-0" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l3-3 6 3 9-3v12l-9 3-6-3-3 3V6z"/><path d="M12 6v12"/><path d="M6 3v12"/><path d="M18 9v12"/></svg>
         </button>
-        <!-- ========================================== -->
-        <!-- END ACHIEVEMENTS MODULE HTML               -->
-        <!-- ========================================== -->
     </div>
 
     <!-- UI Overlay: Leaderboard (Top Right) -->
@@ -312,18 +305,22 @@
             </h3>
             
             <!-- Top Summary Stats -->
-            <div class="grid grid-cols-3 gap-2 mb-4">
-                <div class="bg-blue-50 p-2 rounded-xl border border-blue-100 text-center">
-                    <p class="text-[9px] uppercase font-bold text-blue-500 mb-0.5">Rank</p>
-                    <p class="text-lg font-black text-blue-700" id="stat-modal-rank">#0</p>
+            <div class="grid grid-cols-4 gap-1.5 mb-4">
+                <div class="bg-blue-50 p-2 rounded-xl border border-blue-100 text-center flex flex-col justify-center">
+                    <p class="text-[8px] uppercase font-bold text-blue-500 mb-0.5 tracking-tighter">Rank</p>
+                    <p class="text-base font-black text-blue-700 leading-none" id="stat-modal-rank">#0</p>
                 </div>
-                <div class="bg-amber-50 p-2 rounded-xl border border-amber-100 text-center">
-                    <p class="text-[9px] uppercase font-bold text-amber-500 mb-0.5">Highest</p>
-                    <p class="text-lg font-black text-amber-700" id="stat-modal-highest-rank">#0</p>
+                <div class="bg-amber-50 p-2 rounded-xl border border-amber-100 text-center flex flex-col justify-center">
+                    <p class="text-[8px] uppercase font-bold text-amber-500 mb-0.5 tracking-tighter">Highest</p>
+                    <p class="text-base font-black text-amber-700 leading-none" id="stat-modal-highest-rank">#0</p>
                 </div>
-                <div class="bg-slate-50 p-2 rounded-xl border border-slate-200 text-center">
-                    <p class="text-[9px] uppercase font-bold text-slate-500 mb-0.5">Days Active</p>
-                    <p class="text-lg font-black text-slate-700" id="stat-modal-days">0</p>
+                <div class="bg-purple-50 p-2 rounded-xl border border-purple-100 text-center flex flex-col justify-center">
+                    <p class="text-[8px] uppercase font-bold text-purple-500 mb-0.5 tracking-tighter">Points</p>
+                    <p class="text-base font-black text-purple-700 leading-none" id="stat-modal-points">0</p>
+                </div>
+                <div class="bg-slate-50 p-2 rounded-xl border border-slate-200 text-center flex flex-col justify-center">
+                    <p class="text-[8px] uppercase font-bold text-slate-500 mb-0.5 tracking-tighter">Days Act.</p>
+                    <p class="text-base font-black text-slate-700 leading-none" id="stat-modal-days">0</p>
                 </div>
             </div>
 
@@ -370,7 +367,7 @@
         // ==========================================
         // 0. VERSION CACHE CONTROLLER
         // ==========================================
-        const CURRENT_VERSION = "v6.0";
+        const CURRENT_VERSION = "v5.7";
         const savedVersion = localStorage.getItem('bierisko_app_version');
         
         // If versions mismatch, clear heavy caches to force clean reload
@@ -406,8 +403,13 @@
         
         let rawCantonData = null;
         let rawGemeindeData = null;
-        let gemToCantonMap = {}; 
+        let gemToCantonMap = {};
+        let precalculatedGemAreas = {};
+        let gemFeatureMap = new Map();
+        let gemLayerMap = new Map();
         let tokensState = {};
+        let _vpCache = null;
+        let _vpCacheHistoryLen = -1;
         let activityLog = [];
         let tokenHistory = [];
         let gemeindeOwners = {}; 
@@ -461,248 +463,6 @@
         const locationTutorialModal = document.getElementById('location-tutorial-modal');
         const celebrationModal = document.getElementById('celebration-modal');
         const celebrationMessage = document.getElementById('celebration-message');
-
-        // ==========================================
-        // --- START ACHIEVEMENTS MODULE JS ---
-        // ==========================================
-        const btnAchievements = document.getElementById('btn-achievements');
-        const achievementsModal = document.getElementById('achievements-modal');
-        const btnCloseAchievements = document.getElementById('btn-close-achievements');
-        const achievementsGrid = document.getElementById('achievements-grid');
-        const achievementsCounter = document.getElementById('achievements-counter');
-
-        const ACHIEVEMENTS_DEF = [
-            // Starter / Easy
-            { id: 'first_blood', icon: '🩸', name: 'First Blood', desc: 'Place your very first token.' },
-            { id: 'morning_pint', icon: '🌅', name: 'Frühschoppen', desc: 'Log a beer between 6:00 AM and 10:00 AM.' },
-            { id: 'night_owl', icon: '🦉', name: 'Night Owl', desc: 'Log a beer between 3:00 AM and 5:00 AM.' },
-            { id: 'capital_drinker', icon: '🐻', name: 'Capital Drinker', desc: 'Claim the capital (Gemeinde Bern).' },
-            
-            // Medium
-            { id: '10_beers_day', icon: '🧽', name: 'The Sponge', desc: 'Drink 10 beers in a single day.' },
-            { id: 'weekend_warrior', icon: '🍺', name: 'Weekend Warrior', desc: 'Log 15 beers in a single weekend (Sat/Sun).' },
-            { id: '7_day_streak', icon: '🏃', name: 'Marathon', desc: 'Maintain a 7-day drinking streak.' },
-            { id: 'centurion', icon: '💯', name: 'Centurion', desc: 'Place 100 total tokens on the map.' },
-            { id: '1_month_sober', icon: '🐪', name: 'Dry January', desc: 'Survive 30 days without logging a beer.' },
-            { id: '3_gem_day', icon: '🚜', name: 'Town Terror', desc: 'Conquer 3 Gemeinden in a single day.' },
-            { id: '2_can_day', icon: '⚔️', name: 'Canton Crusher', desc: 'Conquer 2 Cantons in a single day.' },
-            
-            // Hard
-            { id: '4_gem_day', icon: '🎩', name: 'Mayor of Chaos', desc: 'Conquer 4 Gemeinden in a single day.' },
-            { id: '3_can_day', icon: '🇨🇭', name: 'Swiss Warlord', desc: 'Conquer 3 Cantons in a single day.' },
-            { id: 'teleporter', icon: '🛸', name: 'Teleporter', desc: 'Conquer 2 Gemeinden >100km apart in 1 day.' },
-            { id: '100_tokens_gem', icon: '🏠', name: 'Stammgast', desc: 'Have over 100 active tokens on a single Gemeinde.' },
-            { id: 'longest_name', icon: '📜', name: 'Linguist', desc: 'Claim the claimed Gemeinde with the longest name.' },
-            { id: 'shortest_name', icon: '🤏', name: 'Tiny Town', desc: 'Claim the claimed Gemeinde with the shortest name.' },
-            { id: 'rank_1', icon: '👑', name: 'The King', desc: 'Reach Rank #1 on the Leaderboard.' },
-            
-            // Legendary
-            { id: 'monk_mode', icon: '🧘', name: 'Monk Mode', desc: 'Survive 90 days without logging a beer.' },
-            { id: 'all_cantons', icon: '🚂', name: 'Globetrotter', desc: 'Place a token in all 26 Cantons.' },
-            { id: 'long_reign', icon: '🏰', name: 'Long May He Reign', desc: 'Be in 1st place for 30 consecutive days.' },
-            { id: 'monopoly', icon: '🧀', name: 'Monopoly', desc: 'Conquer EVERY Gemeinde in a single Canton.' },
-            { id: '30_day_streak', icon: '🌋', name: 'Unstoppable', desc: 'Maintain a 30-day drinking streak.' }
-        ];
-
-        function checkAchievements() {
-            if (!currentUser || isReplaying || !rawGemeindeData) return;
-            if (!currentUser.achievements) currentUser.achievements = {};
-            
-            let unlockedAny = false;
-            const now = Date.now();
-            const myTokens = tokenHistory.filter(t => t.playerId === currentUser.id);
-            const myActivities = activityLog.filter(l => l.playerId === currentUser.id);
-            
-            const unlock = (id) => {
-                if (!currentUser.achievements[id]) {
-                    currentUser.achievements[id] = now;
-                    unlockedAny = true;
-                    showToast(`🏆 Achievement Unlocked: ${ACHIEVEMENTS_DEF.find(a=>a.id===id).name}!`);
-                }
-            };
-
-            if (myTokens.length === 0) return;
-
-            // 1. Basic Quantity
-            unlock('first_blood');
-            if (myTokens.length >= 100) unlock('centurion');
-
-            // 2. Streaks and Time Gaps
-            const daysSinceLast = (now - myTokens[myTokens.length-1].timestamp) / (1000*60*60*24);
-            if (daysSinceLast >= 30) unlock('1_month_sober');
-            if (daysSinceLast >= 90) unlock('monk_mode');
-
-            if (currentUser.highestRank === 1) unlock('rank_1');
-            if (currentUser.rank1Since && (now - currentUser.rank1Since) >= (30*24*60*60*1000)) unlock('long_reign');
-
-            // 3. Time, Days, and Streaks Iteration
-            const tokensPerDay = {};
-            const gemsConqueredPerDay = {};
-            const cansConqueredPerDay = {};
-            const activeDays = new Set();
-            let cantonsVisited = new Set();
-            const weekCounts = {};
-
-            myTokens.forEach(t => {
-                const dateObj = new Date(t.timestamp);
-                const d = dateObj.toDateString();
-                const hour = dateObj.getHours();
-
-                tokensPerDay[d] = (tokensPerDay[d] || 0) + 1;
-                activeDays.add(d);
-                if (gemToCantonMap[t.gemId]) cantonsVisited.add(gemToCantonMap[t.gemId]);
-                
-                if (hour >= 6 && hour < 10) unlock('morning_pint');
-                if (hour >= 3 && hour < 5) unlock('night_owl');
-
-                if (dateObj.getDay() === 0 || dateObj.getDay() === 6) {
-                    const monday = new Date(dateObj);
-                    monday.setDate(dateObj.getDate() - (dateObj.getDay() === 0 ? 6 : dateObj.getDay() - 1));
-                    monday.setHours(0,0,0,0);
-                    const wKey = monday.getTime();
-                    weekCounts[wKey] = (weekCounts[wKey] || 0) + 1;
-                }
-            });
-
-            myActivities.forEach(a => {
-                const d = new Date(a.timestamp).toDateString();
-                if (a.type.includes('conquer_gem') || a.type.includes('claim_gem')) {
-                    if (!gemsConqueredPerDay[d]) gemsConqueredPerDay[d] = [];
-                    gemsConqueredPerDay[d].push(a.targetName);
-                }
-                if (a.type.includes('conquer_can') || a.type.includes('claim_can')) {
-                    if (!cansConqueredPerDay[d]) cansConqueredPerDay[d] = [];
-                    cansConqueredPerDay[d].push(a.targetName);
-                }
-            });
-
-            // Evaluate Daily Limits
-            Object.values(tokensPerDay).forEach(count => { if(count >= 10) unlock('10_beers_day'); });
-            Object.values(weekCounts).forEach(c => { if(c >= 15) unlock('weekend_warrior'); });
-            
-            Object.values(gemsConqueredPerDay).forEach(arr => {
-                if (arr.length >= 3) unlock('3_gem_day');
-                if (arr.length >= 4) unlock('4_gem_day');
-            });
-            Object.values(cansConqueredPerDay).forEach(arr => {
-                if (arr.length >= 2) unlock('2_can_day');
-                if (arr.length >= 3) unlock('3_can_day');
-            });
-
-            if (cantonsVisited.size === 26) unlock('all_cantons');
-
-            // Streak Tracking
-            let maxStreak = 0; let curStreak = 0; let lastDay = null;
-            Array.from(activeDays).map(d => new Date(d)).sort((a,b)=>a-b).forEach(date => {
-                if (!lastDay) { curStreak = 1; } 
-                else {
-                    const diffDays = Math.round((date - lastDay)/(1000*60*60*24));
-                    if (diffDays === 1) curStreak++; else if (diffDays > 1) curStreak = 1;
-                }
-                if (curStreak > maxStreak) maxStreak = curStreak;
-                lastDay = date;
-            });
-            if (maxStreak >= 7) unlock('7_day_streak');
-            if (maxStreak >= 30) unlock('30_day_streak');
-
-            // 4. Map Control & Distances
-            let globalLongest = 0; let globalShortest = 999;
-            let myLongest = 0; let myShortest = 999;
-            const gemCountPerCanton = {};
-            const myConqueredGemsPerCanton = {};
-
-            Object.keys(tokensState).forEach(gemId => {
-                if (tokensState[gemId][currentUser.id] >= 100) unlock('100_tokens_gem');
-                
-                const owner = gemeindeOwners[gemId]?.ownerId;
-                const canId = gemToCantonMap[gemId];
-                if (canId) {
-                    gemCountPerCanton[canId] = (gemCountPerCanton[canId] || 0) + 1;
-                    if (owner === currentUser.id) myConqueredGemsPerCanton[canId] = (myConqueredGemsPerCanton[canId] || 0) + 1;
-                }
-
-                if (owner) {
-                    const f = rawGemeindeData.features.find(feat => getGemeindeId(feat) === gemId);
-                    if (f) {
-                        const name = getGemeindeName(f);
-                        if (name === 'Bern' && owner === currentUser.id) unlock('capital_drinker');
-                        
-                        const nameLen = name.length;
-                        if (nameLen > globalLongest) globalLongest = nameLen;
-                        if (nameLen < globalShortest) globalShortest = nameLen;
-                        
-                        if (owner === currentUser.id) {
-                            if (nameLen > myLongest) myLongest = nameLen;
-                            if (nameLen < myShortest) myShortest = nameLen;
-                        }
-                    }
-                }
-            });
-
-            Object.keys(gemCountPerCanton).forEach(canId => {
-                if (gemCountPerCanton[canId] >= 3 && myConqueredGemsPerCanton[canId] === gemCountPerCanton[canId]) unlock('monopoly');
-            });
-
-            if (myLongest > 0 && myLongest === globalLongest) unlock('longest_name');
-            if (myShortest < 999 && myShortest === globalShortest) unlock('shortest_name');
-
-            if (!currentUser.achievements['teleporter']) {
-                Object.keys(gemsConqueredPerDay).forEach(d => {
-                    if (gemsConqueredPerDay[d].length >= 2) {
-                        const feats = rawGemeindeData.features.filter(f => gemsConqueredPerDay[d].includes(getGemeindeName(f)));
-                        if (feats.length >= 2) {
-                            try {
-                                const pt1 = turf.centroid(feats[0]);
-                                const pt2 = turf.centroid(feats[feats.length-1]);
-                                if (turf.distance(pt1, pt2, {units: 'kilometers'}) >= 100) unlock('teleporter');
-                            } catch(e){}
-                        }
-                    }
-                });
-            }
-
-            if (unlockedAny) {
-                renderAchievements();
-                if (isFirebaseReady) pushState();
-            }
-        }
-
-        function renderAchievements() {
-            if (!currentUser) return;
-            if (!currentUser.achievements) currentUser.achievements = {};
-            
-            achievementsGrid.innerHTML = '';
-            let unlockedCount = 0;
-
-            ACHIEVEMENTS_DEF.forEach(def => {
-                const isUnlocked = !!currentUser.achievements[def.id];
-                if (isUnlocked) unlockedCount++;
-
-                const card = document.createElement('div');
-                card.className = `p-3 rounded-xl border flex flex-col gap-1 transition-all ${isUnlocked ? 'bg-amber-50 border-amber-200' : 'bg-slate-50 border-slate-200 opacity-60 grayscale'}`;
-                
-                card.innerHTML = `
-                    <div class="flex items-center justify-between mb-1">
-                        <span class="text-2xl">${def.icon}</span>
-                        ${isUnlocked ? '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>' : '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>'}
-                    </div>
-                    <strong class="text-xs text-slate-800 leading-tight">${def.name}</strong>
-                    <p class="text-[9px] text-slate-500 leading-tight">${def.desc}</p>
-                `;
-                achievementsGrid.appendChild(card);
-            });
-
-            achievementsCounter.innerText = `${unlockedCount} / ${ACHIEVEMENTS_DEF.length} Unlocked`;
-        }
-
-        btnAchievements.addEventListener('click', () => {
-            renderAchievements();
-            achievementsModal.classList.remove('hidden');
-        });
-        btnCloseAchievements.addEventListener('click', () => achievementsModal.classList.add('hidden'));
-        // ==========================================
-        // --- END ACHIEVEMENTS MODULE JS ---
-        // ==========================================
 
         // ==========================================
         // 3. UTILITIES & EVENT SOURCING
@@ -786,15 +546,20 @@
             if (!currentUser) return;
             currentUser.color = hex;
             registeredUsers[currentUser.id].color = hex;
-            
+
             document.getElementById('profile-color').style.backgroundColor = hex;
             updateUIForUser();
             refreshMapVisuals();
             renderActivityBox();
             updateLeaderboard();
-            renderColorPicker(); 
-            
-            if (isFirebaseReady) pushState(); 
+
+            // Swap selected state on the picker buttons without rebuilding the whole grid
+            const prev = colorPickerGrid.querySelector('[data-color].border-slate-800');
+            if (prev) { prev.className = prev.className.replace('border-slate-800 scale-110 shadow-md', 'border-transparent hover:scale-110'); prev.onclick = () => window.selectColor(prev.dataset.color); }
+            const next = colorPickerGrid.querySelector(`[data-color="${hex}"]`);
+            if (next) { next.className = next.className.replace('border-transparent hover:scale-110', 'border-slate-800 scale-110 shadow-md'); next.onclick = null; }
+
+            if (isFirebaseReady) pushState();
             showToast("Color updated!");
         }
 
@@ -815,11 +580,12 @@
                 const isTaken = takenPremium.includes(color);
                 const isLocked = !hasBeenRank1 || isTaken;
                 const isSelected = currentUser.color === color;
-                
+
                 const btn = document.createElement('button');
+                btn.dataset.color = color;
                 btn.className = `w-7 h-7 rounded-full flex items-center justify-center border-2 transition-transform ${isSelected ? 'border-slate-800 scale-110 shadow-md' : 'border-transparent hover:scale-110'}`;
                 btn.style.backgroundColor = color;
-                
+
                 if (isLocked && !isSelected) {
                     btn.style.opacity = '0.3';
                     btn.style.cursor = 'not-allowed';
@@ -838,9 +604,10 @@
             STANDARD_COLORS.forEach(color => {
                 const isSelected = currentUser.color === color;
                 const btn = document.createElement('button');
+                btn.dataset.color = color;
                 btn.className = `w-7 h-7 rounded-full flex items-center justify-center border-2 transition-transform ${isSelected ? 'border-slate-800 scale-110 shadow-md' : 'border-transparent hover:scale-110'}`;
                 btn.style.backgroundColor = color;
-                
+
                 if (!isSelected) btn.onclick = () => window.selectColor(color);
                 colorPickerGrid.appendChild(btn);
             });
@@ -889,15 +656,15 @@
         }
 
         function refreshMapVisuals() {
-            if (gemeindeGeoJsonLayer) { 
-                gemeindeGeoJsonLayer.eachLayer(l => { updateLayerStyle(l, getGemeindeStyle(l.feature)); updateGemeindeLabel(l); 
+            if (currentView === 'gemeinde' && gemeindeGeoJsonLayer) {
+                gemeindeGeoJsonLayer.eachLayer(l => { updateLayerStyle(l, getGemeindeStyle(l.feature)); updateGemeindeLabel(l);
                     if (l.isPopupOpen()) l.setPopupContent(generateGemeindePopupContent(l.feature));
-                }); 
+                });
             }
-            if (cantonGeoJsonLayer) { 
-                cantonGeoJsonLayer.eachLayer(l => { updateLayerStyle(l, getCantonStyle(l.feature)); 
+            if (currentView === 'canton' && cantonGeoJsonLayer) {
+                cantonGeoJsonLayer.eachLayer(l => { updateLayerStyle(l, getCantonStyle(l.feature));
                     if (l.isPopupOpen()) l.setPopupContent(generateCantonPopupContent(l.feature));
-                }); 
+                });
             }
         }
 
@@ -988,21 +755,6 @@
                     registeredUsers[currentUser.id].highestRank = myRank;
                     if (isFirebaseReady && !isReplaying) pushState();
                 }
-                
-                // Track consecutive days as rank 1 for Achievements
-                if (myRank === 1) {
-                    if (!currentUser.rank1Since) {
-                        currentUser.rank1Since = Date.now();
-                        registeredUsers[currentUser.id].rank1Since = currentUser.rank1Since;
-                        if (isFirebaseReady && !isReplaying) pushState();
-                    }
-                } else {
-                    if (currentUser.rank1Since) {
-                        currentUser.rank1Since = null;
-                        registeredUsers[currentUser.id].rank1Since = null;
-                        if (isFirebaseReady && !isReplaying) pushState();
-                    }
-                }
             }
 
             leaderboard.innerHTML = '';
@@ -1017,8 +769,100 @@
             }
         }
 
+        // On-Demand Victory Points Simulation Engine
+        function getVictoryPoints() {
+            if (_vpCache && _vpCacheHistoryLen === tokenHistory.length) return _vpCache;
+            let victoryPoints = {};
+            if (!rawGemeindeData || !rawCantonData || tokenHistory.length === 0) return victoryPoints;
+
+            const tempTokens = {};
+            const tempGemOwners = {};
+            const tempCanAreas = {};
+            const tempCanOwners = {};
+            const cantonTimeHeld = {};
+            const playerTimeAccumulated = {};
+
+            rawCantonData.features.forEach(f => {
+                const cid = getCantonId(f);
+                tempCanAreas[cid] = {};
+                tempCanOwners[cid] = null;
+                cantonTimeHeld[cid] = { ownerId: null, since: 0 };
+            });
+
+            const sortedHistory = [...tokenHistory].sort((a,b) => a.timestamp - b.timestamp);
+
+            sortedHistory.forEach(event => {
+                const gemId = event.gemId;
+                const pid = event.playerId;
+                const ts = event.timestamp;
+                const canId = gemToCantonMap[gemId];
+                const area = precalculatedGemAreas[gemId];
+
+                if (!canId || area === undefined) return;
+
+                if (!tempTokens[gemId]) tempTokens[gemId] = {};
+                tempTokens[gemId][pid] = (tempTokens[gemId][pid] || 0) + 1;
+
+                let maxT = 0, gOwner = null, gTie = false;
+                Object.keys(tempTokens[gemId]).forEach(p => {
+                    if (tempTokens[gemId][p] > maxT) { maxT = tempTokens[gemId][p]; gOwner = p; gTie = false; }
+                    else if (tempTokens[gemId][p] === maxT) gTie = true;
+                });
+                const newGemOwner = gTie ? null : gOwner;
+                const oldGemOwner = tempGemOwners[gemId];
+
+                if (newGemOwner !== oldGemOwner) {
+                    tempGemOwners[gemId] = newGemOwner;
+
+                    if (oldGemOwner) tempCanAreas[canId][oldGemOwner] = Math.round(((tempCanAreas[canId][oldGemOwner] || 0) - area) * 10000) / 10000;
+                    if (newGemOwner) tempCanAreas[canId][newGemOwner] = Math.round(((tempCanAreas[canId][newGemOwner] || 0) + area) * 10000) / 10000;
+
+                    let maxA = 0, cOwner = null, cTie = false;
+                    Object.keys(tempCanAreas[canId]).forEach(p => {
+                        if (tempCanAreas[canId][p] > maxA) { maxA = tempCanAreas[canId][p]; cOwner = p; cTie = false; }
+                        else if (tempCanAreas[canId][p] === maxA && maxA > 0) cTie = true;
+                    });
+                    const newCanOwner = cTie ? null : cOwner;
+                    const oldCanOwner = tempCanOwners[canId];
+
+                    if (newCanOwner !== oldCanOwner) {
+                        tempCanOwners[canId] = newCanOwner;
+
+                        if (oldCanOwner && cantonTimeHeld[canId].ownerId === oldCanOwner) {
+                            const heldMs = ts - cantonTimeHeld[canId].since;
+                            playerTimeAccumulated[oldCanOwner] = (playerTimeAccumulated[oldCanOwner] || 0) + heldMs;
+                        }
+
+                        cantonTimeHeld[canId] = { ownerId: newCanOwner, since: ts };
+                    }
+                }
+            });
+
+            const now = Date.now();
+            Object.keys(cantonTimeHeld).forEach(canId => {
+                const info = cantonTimeHeld[canId];
+                if (info.ownerId) {
+                    const heldMs = now - info.since;
+                    playerTimeAccumulated[info.ownerId] = (playerTimeAccumulated[info.ownerId] || 0) + heldMs;
+                }
+            });
+
+            const MS_PER_DAY = 1000 * 60 * 60 * 24;
+            Object.keys(playerTimeAccumulated).forEach(pid => {
+                victoryPoints[pid] = Math.floor(playerTimeAccumulated[pid] / MS_PER_DAY);
+            });
+
+            _vpCache = victoryPoints;
+            _vpCacheHistoryLen = tokenHistory.length;
+            return victoryPoints;
+        }
+
         window.showPlayerStats = function(pid) {
             const p = getUser(pid); 
+            
+            // Generate Victory Points exactly when requested
+            const vpScores = getVictoryPoints();
+            const myVp = vpScores[pid] || 0;
             
             const allStats = [];
             Object.keys(registeredUsers).forEach(uid => {
@@ -1053,6 +897,7 @@
             
             document.getElementById('stat-modal-rank').innerText = '#' + overallRank;
             document.getElementById('stat-modal-highest-rank').innerText = '#' + highestRank;
+            document.getElementById('stat-modal-points').innerText = myVp;
             document.getElementById('stat-modal-days').innerText = daysReg;
 
             document.getElementById('stat-modal-cantons').innerText = myStats.c; 
@@ -1088,13 +933,336 @@
         }
 
         // ==========================================
-        // 8. GAME LOGIC ENGINE
+        // --- START ACHIEVEMENTS MODULE JS ---
+        // ==========================================
+        const btnAchievements = document.getElementById('btn-achievements');
+        const achievementsModal = document.getElementById('achievements-modal');
+        const btnCloseAchievements = document.getElementById('btn-close-achievements');
+        const achievementsGrid = document.getElementById('achievements-grid');
+        const achievementsCounter = document.getElementById('achievements-counter');
+
+        const ACHIEVEMENTS_DEF = [
+            // Starter / Easy
+            { id: 'first_blood', icon: '🩸', name: 'First Blood', desc: 'Place your very first token.' },
+            { id: 'first_gem', icon: '📜', name: 'Landowner', desc: 'Own a Gemeinde for the first time.' },
+            { id: 'first_can', icon: '🏛️', name: 'The Governor', desc: 'Own a Canton for the first time.' },
+            { id: 'morning_pint', icon: '🌅', name: 'Frühschoppen', desc: 'Log a beer between 6:00 AM and 10:00 AM.' },
+            { id: 'lucky_seven', icon: '🎰', name: 'Lucky Number 7', desc: 'Claim a Gemeinde with exactly 7 letters in its name.' },
+            { id: 'party_animal', icon: '🪩', name: 'Party Animal', desc: 'Place a token in the most contested Gemeinde.' },
+            { id: 'usurper_gem', icon: '🥷', name: 'Usurper', desc: 'Take over a Gemeinde from another player.' },
+            { id: 'capital_drinker', icon: '🐻', name: 'Capital Drinker', desc: 'Claim the capital (Gemeinde Bern).' },
+            
+            // Medium
+            { id: '10_beers_day', icon: '🧽', name: 'The Sponge', desc: 'Drink 10 beers in a single day.', target: 10, key: 'maxBeersDay' },
+            { id: 'weekend_warrior', icon: '🍺', name: 'Weekend Warrior', desc: 'Log 15 beers in a single weekend (Sat/Sun).', target: 15, key: 'maxWeekendBeers' },
+            { id: '7_day_streak', icon: '🏃', name: 'Marathon', desc: 'Maintain a 7-day drinking streak.', target: 7, key: 'maxStreak' },
+            { id: 'centurion', icon: '💯', name: 'Centurion', desc: 'Place 100 total tokens on the map.', target: 100, key: 'totalTokens' },
+            { id: '1_month_sober', icon: '🐪', name: 'Dry January', desc: 'Survive 30 days without logging a beer.', target: 30, key: 'maxDryDays' },
+            { id: '3_gem_day', icon: '🚜', name: 'Town Terror', desc: 'Conquer 3 Gemeinden in a single day.', target: 3, key: 'maxGemsDay' },
+            { id: '2_can_day', icon: '⚔️', name: 'Canton Crusher', desc: 'Conquer 2 Cantons in a single day.', target: 2, key: 'maxCansDay' },
+            { id: 'usurper_can', icon: '🏴‍☠️', name: 'Canton Conqueror', desc: 'Take over a Canton from another player.' },
+            { id: 'started_bottom', icon: '🏔️', name: 'Started From The Bottom', desc: 'Place a token in Avers (highest) and Ascona (lowest).', target: 2, key: 'extremeGems' },
+            
+            // Hard
+            { id: '4_gem_day', icon: '🎩', name: 'Mayor of Chaos', desc: 'Conquer 4 Gemeinden in a single day.', target: 4, key: 'maxGemsDay' },
+            { id: '3_can_day', icon: '🇨🇭', name: 'Swiss Warlord', desc: 'Conquer 3 Cantons in a single day.', target: 3, key: 'maxCansDay' },
+            { id: 'teleporter', icon: '🛸', name: 'Teleporter', desc: 'Conquer 2 Gemeinden >100km apart in 1 day.' },
+            { id: 'king_north', icon: '🐺', name: 'King in the North', desc: 'Own the northernmost Gemeinde (Bargen SH).' },
+            { id: 'southern_hosp', icon: '🍝', name: 'Southern Hospitality', desc: 'Own the southernmost Gemeinde (Chiasso).' },
+            { id: 'eastern_block', icon: '🌄', name: 'Eastern Block', desc: 'Own the easternmost Gemeinde (Val Müstair).' },
+            { id: 'wild_west', icon: '🤠', name: 'Wild West', desc: 'Own the westernmost Gemeinde (Chancy).' },
+            { id: '100_tokens_gem', icon: '🏠', name: 'Stammgast', desc: 'Have over 100 active tokens on a single Gemeinde.', target: 100, key: 'maxTokensOneGem' },
+            { id: 'longest_name', icon: '📜', name: 'Linguist', desc: 'Claim the claimed Gemeinde with the longest name.' },
+            { id: 'shortest_name', icon: '🤏', name: 'Tiny Town', desc: 'Claim the claimed Gemeinde with the shortest name.' },
+            { id: 'comeback', icon: '📉', name: 'The Comeback', desc: 'Reach Rank #1 after being ranked 10th or lower.' },
+            { id: 'rank_1', icon: '👑', name: 'The King', desc: 'Reach Rank #1 on the Leaderboard.' },
+            
+            // Legendary
+            { id: 'monopoly', icon: '🧀', name: 'Monopoly', desc: 'Conquer EVERY Gemeinde in a single Canton.' },
+            { id: 'monk_mode', icon: '🧘', name: 'Monk Mode', desc: 'Survive 90 days without logging a beer.', target: 90, key: 'maxDryDays' },
+            { id: 'all_cantons', icon: '🚂', name: 'Globetrotter', desc: 'Place a token in all 26 Cantons.', target: 26, key: 'cantonsVisited' },
+            { id: 'long_reign', icon: '🏰', name: 'Long May He Reign', desc: 'Be in 1st place for 30 consecutive days.', target: 30, key: 'rank1Days' }
+        ];
+
+        function checkAchievements() {
+            if (!currentUser || isReplaying || !rawGemeindeData) return;
+            if (!currentUser.achievements) currentUser.achievements = {};
+            
+            let unlockedAny = false;
+            const now = Date.now();
+            const myTokens = tokenHistory.filter(t => t.playerId === currentUser.id);
+            const myActivities = activityLog.filter(l => l.playerId === currentUser.id);
+            
+            const progress = {
+                maxBeersDay: 0, maxWeekendBeers: 0, maxStreak: 0, totalTokens: myTokens.length,
+                maxDryDays: 0, maxGemsDay: 0, maxCansDay: 0, extremeGems: 0, maxTokensOneGem: 0,
+                cantonsVisited: 0, rank1Days: 0
+            };
+
+            const unlock = (id) => {
+                if (!currentUser.achievements[id]) {
+                    currentUser.achievements[id] = now;
+                    unlockedAny = true;
+                    showToast(`🏆 Achievement Unlocked: ${ACHIEVEMENTS_DEF.find(a=>a.id===id).name}!`);
+                }
+            };
+
+            if (myTokens.length === 0) {
+                renderAchievements(progress);
+                return;
+            }
+
+            // 1. Basic Quantity
+            unlock('first_blood');
+            if (myTokens.length >= 100) unlock('centurion');
+
+            // 2. Streaks and Time Gaps
+            let maxGap = 0;
+            for(let i=1; i<myTokens.length; i++) {
+                const gap = (myTokens[i].timestamp - myTokens[i-1].timestamp) / (1000*60*60*24);
+                if(gap > maxGap) maxGap = gap;
+            }
+            const daysSinceLast = (now - myTokens[myTokens.length-1].timestamp) / (1000*60*60*24);
+            if(daysSinceLast > maxGap) maxGap = daysSinceLast;
+            progress.maxDryDays = Math.floor(maxGap);
+
+            if (progress.maxDryDays >= 30) unlock('1_month_sober');
+            if (progress.maxDryDays >= 90) unlock('monk_mode');
+
+            if (currentUser.highestRank === 1) unlock('rank_1');
+            if (currentUser.highestRank === 1 && currentUser.wasBelow10) unlock('comeback');
+            
+            if (currentUser.rank1Since) {
+                progress.rank1Days = Math.floor((now - currentUser.rank1Since) / (1000*60*60*24));
+                if (progress.rank1Days >= 30) unlock('long_reign');
+            }
+
+            // 3. Time, Days, and Streaks Iteration
+            const tokensPerDay = {};
+            const gemsConqueredPerDay = {};
+            const cansConqueredPerDay = {};
+            const activeDays = new Set();
+            let cantonsVisited = new Set();
+            const weekCounts = {};
+            let hasAvers = false;
+            let hasAscona = false;
+
+            myTokens.forEach(t => {
+                const dateObj = new Date(t.timestamp);
+                const d = dateObj.toDateString();
+                const hour = dateObj.getHours();
+
+                tokensPerDay[d] = (tokensPerDay[d] || 0) + 1;
+                activeDays.add(dateObj.toISOString().split('T')[0]);
+                const canId = gemToCantonMap[t.gemId];
+                if (canId) cantonsVisited.add(canId);
+                
+                if (hour >= 6 && hour < 10) unlock('morning_pint');
+
+                if (dateObj.getDay() === 0 || dateObj.getDay() === 6) {
+                    const monday = new Date(dateObj);
+                    monday.setDate(dateObj.getDate() - (dateObj.getDay() === 0 ? 6 : dateObj.getDay() - 1));
+                    monday.setHours(0,0,0,0);
+                    const wKey = monday.getTime();
+                    weekCounts[wKey] = (weekCounts[wKey] || 0) + 1;
+                }
+
+                const feat = gemFeatureMap.get(t.gemId);
+                if (feat) {
+                    const gName = getGemeindeName(feat);
+                    if (gName === 'Avers') hasAvers = true;
+                    if (gName === 'Ascona') hasAscona = true;
+                }
+            });
+
+            progress.extremeGems = (hasAvers ? 1 : 0) + (hasAscona ? 1 : 0);
+            if (progress.extremeGems >= 2) unlock('started_bottom');
+            
+            progress.cantonsVisited = cantonsVisited.size;
+            if (progress.cantonsVisited >= 26) unlock('all_cantons');
+
+            myActivities.forEach(a => {
+                const d = new Date(a.timestamp).toDateString();
+                if (a.type === 'conquer_gem' || a.type === 'claim_gem') {
+                    if (!gemsConqueredPerDay[d]) gemsConqueredPerDay[d] = new Set();
+                    gemsConqueredPerDay[d].add(a.targetName);
+                }
+                if (a.type === 'conquer_can' || a.type === 'claim_can') {
+                    if (!cansConqueredPerDay[d]) cansConqueredPerDay[d] = new Set();
+                    cansConqueredPerDay[d].add(a.targetName);
+                }
+                if (a.type === 'conquer_gem') unlock('usurper_gem');
+                if (a.type === 'conquer_can') unlock('usurper_can');
+            });
+
+            // Evaluate Daily Limits
+            progress.maxBeersDay = Object.values(tokensPerDay).reduce((a,b)=>Math.max(a,b), 0);
+            progress.maxWeekendBeers = Object.values(weekCounts).reduce((a,b)=>Math.max(a,b), 0);
+            
+            if (progress.maxBeersDay >= 10) unlock('10_beers_day');
+            if (progress.maxWeekendBeers >= 15) unlock('weekend_warrior');
+            
+            progress.maxGemsDay = Object.values(gemsConqueredPerDay).map(set=>set.size).reduce((a,b)=>Math.max(a,b), 0);
+            progress.maxCansDay = Object.values(cansConqueredPerDay).map(set=>set.size).reduce((a,b)=>Math.max(a,b), 0);
+
+            if (progress.maxGemsDay >= 3) unlock('3_gem_day');
+            if (progress.maxGemsDay >= 4) unlock('4_gem_day');
+            if (progress.maxCansDay >= 2) unlock('2_can_day');
+            if (progress.maxCansDay >= 3) unlock('3_can_day');
+
+            // Streak Tracking using absolute Day IDs (DST safe)
+            const dayNumbers = Array.from(activeDays).map(d => Math.floor(new Date(d).getTime() / 86400000)).sort((a,b)=>a-b);
+            let curStreak = 0; let maxStreak = 0; let prevDay = -999;
+            dayNumbers.forEach(day => {
+                if (day === prevDay + 1) curStreak++;
+                else if (day > prevDay + 1) curStreak = 1;
+                else curStreak = 1;
+                if (curStreak > maxStreak) maxStreak = curStreak;
+                prevDay = day;
+            });
+            progress.maxStreak = maxStreak;
+            if (maxStreak >= 7) unlock('7_day_streak');
+
+            // 4. Map Control & Distances
+            let globalLongest = 0; let globalShortest = 999;
+            let myLongest = 0; let myShortest = 999;
+            const gemCountPerCanton = {};
+            const myConqueredGemsPerCanton = {};
+            let ownedGems = 0;
+            let ownedCans = 0;
+
+            // Find most contested Gemeinde for Party Animal
+            let maxPlayersInGem = 0; let popularGems = [];
+            Object.keys(tokensState).forEach(gemId => {
+                const pCount = Object.keys(tokensState[gemId]).length;
+                if (pCount > maxPlayersInGem) { maxPlayersInGem = pCount; popularGems = [gemId]; }
+                else if (pCount === maxPlayersInGem) { popularGems.push(gemId); }
+            });
+            if (myTokens.some(t => popularGems.includes(t.gemId))) unlock('party_animal');
+
+            Object.keys(tokensState).forEach(gemId => {
+                const myT = tokensState[gemId][currentUser.id] || 0;
+                if (myT > progress.maxTokensOneGem) progress.maxTokensOneGem = myT;
+                if (myT >= 100) unlock('100_tokens_gem');
+                
+                const owner = gemeindeOwners[gemId]?.ownerId;
+                const canId = gemToCantonMap[gemId];
+                if (canId) {
+                    gemCountPerCanton[canId] = (gemCountPerCanton[canId] || 0) + 1;
+                    if (owner === currentUser.id) myConqueredGemsPerCanton[canId] = (myConqueredGemsPerCanton[canId] || 0) + 1;
+                }
+
+                if (owner) {
+                    const f = gemFeatureMap.get(gemId);
+                    if (f) {
+                        const name = getGemeindeName(f);
+                        if (name === 'Bern' && owner === currentUser.id) unlock('capital_drinker');
+                        if (name.length === 7 && owner === currentUser.id) unlock('lucky_seven');
+                        if (name === 'Bargen (SH)' && owner === currentUser.id) unlock('king_north');
+                        if (name === 'Chiasso' && owner === currentUser.id) unlock('southern_hosp');
+                        if (name === 'Val Müstair' && owner === currentUser.id) unlock('eastern_block');
+                        if (name === 'Chancy' && owner === currentUser.id) unlock('wild_west');
+                        
+                        const nameLen = name.length;
+                        if (nameLen > globalLongest) globalLongest = nameLen;
+                        if (nameLen < globalShortest) globalShortest = nameLen;
+                        
+                        if (owner === currentUser.id) {
+                            ownedGems++;
+                            if (nameLen > myLongest) myLongest = nameLen;
+                            if (nameLen < myShortest) myShortest = nameLen;
+                        }
+                    }
+                }
+            });
+
+            Object.keys(cantonStats).forEach(canId => {
+                if(cantonStats[canId]?.ownerId === currentUser.id) ownedCans++;
+            });
+
+            if (ownedGems > 0) unlock('first_gem');
+            if (ownedCans > 0) unlock('first_can');
+
+            Object.keys(gemCountPerCanton).forEach(canId => {
+                if (gemCountPerCanton[canId] >= 3 && myConqueredGemsPerCanton[canId] === gemCountPerCanton[canId]) unlock('monopoly');
+            });
+
+            if (myLongest > 0 && myLongest === globalLongest) unlock('longest_name');
+            if (myShortest < 999 && myShortest === globalShortest) unlock('shortest_name');
+
+            if (!currentUser.achievements['teleporter']) {
+                Object.keys(gemsConqueredPerDay).forEach(d => {
+                    if (gemsConqueredPerDay[d].size >= 2) {
+                        const namesArray = Array.from(gemsConqueredPerDay[d]);
+                        const feats = rawGemeindeData.features.filter(f => namesArray.includes(getGemeindeName(f)));
+                        if (feats.length >= 2) {
+                            try {
+                                const pt1 = turf.centroid(feats[0]);
+                                const pt2 = turf.centroid(feats[feats.length-1]);
+                                if (turf.distance(pt1, pt2, {units: 'kilometers'}) >= 100) unlock('teleporter');
+                            } catch(e){}
+                        }
+                    }
+                });
+            }
+
+            renderAchievements(progress);
+            if (unlockedAny && isFirebaseReady) pushState();
+        }
+
+        function renderAchievements(progress) {
+            if (!currentUser) return;
+            if (!currentUser.achievements) currentUser.achievements = {};
+            
+            achievementsGrid.innerHTML = '';
+            let unlockedCount = 0;
+
+            ACHIEVEMENTS_DEF.forEach(def => {
+                const isUnlocked = !!currentUser.achievements[def.id];
+                if (isUnlocked) unlockedCount++;
+
+                const card = document.createElement('div');
+                card.className = `p-3 rounded-xl border flex flex-col gap-1 transition-all ${isUnlocked ? 'bg-amber-50 border-amber-200' : 'bg-slate-50 border-slate-200 opacity-60 grayscale'}`;
+                
+                let progressHtml = '';
+                if (!isUnlocked && def.target && progress && progress[def.key] !== undefined) {
+                    progressHtml = `<p class="text-[9px] text-blue-500 font-bold mt-1">Best: ${progress[def.key]} / ${def.target}</p>`;
+                } else if (isUnlocked) {
+                    progressHtml = `<p class="text-[9px] text-emerald-600 font-bold mt-1">Completed</p>`;
+                }
+
+                card.innerHTML = `
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-2xl">${def.icon}</span>
+                        ${isUnlocked ? '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>' : '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>'}
+                    </div>
+                    <strong class="text-xs text-slate-800 leading-tight">${def.name}</strong>
+                    <p class="text-[9px] text-slate-500 leading-tight">${def.desc}</p>
+                    ${progressHtml}
+                `;
+                achievementsGrid.appendChild(card);
+            });
+
+            achievementsCounter.innerText = `${unlockedCount} / ${ACHIEVEMENTS_DEF.length} Unlocked`;
+        }
+
+        btnAchievements.addEventListener('click', () => {
+            checkAchievements();
+            achievementsModal.classList.remove('hidden');
+        });
+        btnCloseAchievements.addEventListener('click', () => achievementsModal.classList.add('hidden'));
+        // ==========================================
+        // --- END ACHIEVEMENTS MODULE JS ---
+        // ==========================================
+
+        // ==========================================
+        // 7. GAME LOGIC ENGINE
         // ==========================================
         function calculateGameState() {
             gemeindeOwners = {}; cantonStats = {};
             if (rawCantonData) rawCantonData.features.forEach(f => cantonStats[getCantonId(f)] = { ownerId: null, areas: {} });
             if (rawGemeindeData) rawGemeindeData.features.forEach(gem => {
-                const id = getGemeindeId(gem), area = (turf.area(gem) / 1000000), tokens = tokensState[id] || {};
+                const id = getGemeindeId(gem), area = precalculatedGemAreas[id] || 0, tokens = tokensState[id] || {};
                 let max = 0, owner = null, tie = false, total = 0;
                 Object.keys(tokens).forEach(pid => { 
                     const c = tokens[pid]; if (c > 0) { total += c; if (c > max) { max = c; owner = pid; tie = false; } else if (c === max) tie = true; }
@@ -1124,7 +1292,7 @@
         }
 
         // ==========================================
-        // 9. SURGICAL FIREBASE SYNC ENGINE
+        // 8. SURGICAL FIREBASE SYNC ENGINE
         // ==========================================
         const firebaseConfig = {
             apiKey: "AIzaSyCfzl0RKiF0Yy8XXAZ0O20TEmDV5gogh9I",
@@ -1144,7 +1312,6 @@
         async function pushState() {
             if (!isFirebaseReady || !isInitialDataLoaded || !currentUser) return;
             
-            // SURGICAL PUSH
             let myTokens = {};
             for (let gem in tokensState) {
                 if (tokensState[gem][currentUser.id] !== undefined) {
@@ -1166,14 +1333,15 @@
         }
 
         function applyServerData(data) {
-            registeredUsers = data.users || {}; 
-            activityLog = (data.activityLog || []).filter(log => log.type !== 'system'); 
+            registeredUsers = data.users || {};
+            activityLog = (data.activityLog || []).filter(log => log.type !== 'system');
             tokenHistory = data.tokenHistory || [];
-            
+            _vpCache = null;
+
             rebuildTokensFromHistory();
-            
+
             if (currentUser && registeredUsers[currentUser.id]) currentUser = registeredUsers[currentUser.id];
-            calculateGameState(); renderActivityBox(); refreshMapVisuals(); checkAchievements();
+            calculateGameState(); renderActivityBox(); refreshMapVisuals();
         }
 
         function unlockUIAndAutoLogin() {
@@ -1206,11 +1374,16 @@
         }
 
         // ==========================================
-        // 10. MAP INIT & FETCH FALLBACK
+        // 9. MAP INIT & FETCH FALLBACK
         // ==========================================
         async function fetchWithFallback(urls) {
             for (let url of urls) {
-                try { let res = await fetch(url); if (res.ok) return await res.json(); } catch (e) { console.warn(`Fetch failed for ${url}`, e); }
+                try {
+                    let res = await fetch(url);
+                    if (res.ok) return await res.json();
+                } catch (e) {
+                    console.warn(`Fetch failed for ${url}`, e);
+                }
             }
             throw new Error("All fetch attempts failed");
         }
@@ -1246,13 +1419,25 @@
                 const [rc, rm] = await Promise.all([ fetchWithFallback(C_URLS), fetchWithFallback(M_URLS) ]);
                 rawCantonData = rc;
                 rawGemeindeData = rm;
+
+                // Precalculate areas and build gemId→feature lookup in one pass
+                rawGemeindeData.features.forEach(gem => {
+                    const gid = getGemeindeId(gem);
+                    precalculatedGemAreas[gid] = Math.round(turf.area(gem) / 1000000 * 10000) / 10000;
+                    gemFeatureMap.set(gid, gem);
+                });
                 
                 const cached = localStorage.getItem('bierisko_spatial_map_v4');
                 if (cached) gemToCantonMap = JSON.parse(cached); else {
                     loaderText.innerText = "Indexing territories...";
                     for (const gem of rawGemeindeData.features) {
                         const id = getGemeindeId(gem);
-                        if (gem.properties?.ste_code) { gemToCantonMap[id] = String(gem.properties.ste_code); continue; }
+                        // Try fast path mapping first
+                        if (gem.properties?.ste_code) {
+                            gemToCantonMap[id] = String(gem.properties.ste_code);
+                            continue;
+                        }
+                        // Fallback to geometric mapping
                         try {
                             const pt = turf.pointOnFeature(gem);
                             for (const can of rawCantonData.features) { if (turf.booleanPointInPolygon(pt, can)) { gemToCantonMap[id] = getCantonId(can); break; } }
@@ -1273,8 +1458,8 @@
                         mouseout: (e) => { if (activePopupGemId === getGemeindeId(f)) return; const s = getGemeindeStyle(f); e.target.setStyle(s); e.target._cachedStyleStr = JSON.stringify(s); }
                     });
                 } }).addTo(gemeindeLayerGroup);
-                gemeindeGeoJsonLayer.eachLayer(l => updateGemeindeLabel(l)); 
-                
+                gemeindeGeoJsonLayer.eachLayer(l => { updateGemeindeLabel(l); gemLayerMap.set(getGemeindeId(l.feature), l); });
+
                 cantonBordersGeoJsonLayer = L.geoJSON(rawCantonData, { style: { fillColor: 'transparent', fillOpacity: 0, color: '#475569', weight: 2 }, interactive: false }).addTo(cantonBordersLayerGroup);
                 
                 cantonGeoJsonLayer = L.geoJSON(rawCantonData, { style: getCantonStyle, onEachFeature: (f, l) => {
@@ -1298,16 +1483,15 @@
             } catch(error) { loaderText.innerText = "Boot error. Please refresh."; console.error(error); }
         }
 
-        // ==========================================
-        // 11. TOKEN PLACEMENT & REPLAY
-        // ==========================================
         window.placeToken = function(id) {
             if (currentView !== 'gemeinde' || !currentUser || isReplaying) return;
             const prevGemTokens = gemeindeOwners[id]?.totalTokens || 0, prevGemOwner = gemeindeOwners[id]?.ownerId, prevCanOwner = cantonStats[gemToCantonMap[id]]?.ownerId;
             
             const ts = Date.now(); let targetName = "Unknown";
             tokenHistory.push({ playerId: currentUser.id, gemId: id, timestamp: ts });
-            rebuildTokensFromHistory();
+            if (!tokensState[id]) tokensState[id] = {};
+            tokensState[id][currentUser.id] = (tokensState[id][currentUser.id] || 0) + 1;
+            _vpCache = null;
             calculateGameState();
 
             const newGemOwner = gemeindeOwners[id]?.ownerId, newCanOwner = cantonStats[gemToCantonMap[id]]?.ownerId;
@@ -1316,13 +1500,12 @@
             let conqueredName = null;
             let conqueredType = null;
 
-            gemeindeGeoJsonLayer.eachLayer(l => {
-                if (getGemeindeId(l.feature) === id) {
-                    targetName = getGemeindeName(l.feature); updateLayerStyle(l, getGemeindeStyle(l.feature)); updateGemeindeLabel(l, true, currentUser.color); 
-                    if (l._path) { l._path.classList.remove('anim-takeover', 'anim-token'); void l._path.offsetWidth; l._path.classList.add(isGemTakeover ? 'anim-takeover' : 'anim-token'); }
-                    if (l.isPopupOpen()) l.setPopupContent(generateGemeindePopupContent(l.feature));
-                }
-            });
+            const gemLayer = gemLayerMap.get(id);
+            if (gemLayer) {
+                targetName = getGemeindeName(gemLayer.feature); updateLayerStyle(gemLayer, getGemeindeStyle(gemLayer.feature)); updateGemeindeLabel(gemLayer, true, currentUser.color);
+                if (gemLayer._path) { gemLayer._path.classList.remove('anim-takeover', 'anim-token'); void gemLayer._path.offsetWidth; gemLayer._path.classList.add(isGemTakeover ? 'anim-takeover' : 'anim-token'); }
+                if (gemLayer.isPopupOpen()) gemLayer.setPopupContent(generateGemeindePopupContent(gemLayer.feature));
+            }
             if (isCanTakeover && cantonBordersGeoJsonLayer) {
                 cantonBordersGeoJsonLayer.eachLayer(l => { 
                     if (getCantonId(l.feature) === gemToCantonMap[id]) {
@@ -1352,7 +1535,7 @@
             }
 
             if (!currentUser.hasSeenUndoHint) { currentUser.hasSeenUndoHint = true; saveLocalUserLastSeen(); setTimeout(() => { settingsModal.classList.remove('hidden'); undoHint.classList.remove('hidden'); btnUndo.classList.add('ring-4', 'ring-amber-400', 'animate-pulse'); }, 1000); }
-            currentUser.lastSeen = ts; saveLocalUserLastSeen(); renderActivityBox(); refreshMapVisuals(); checkAchievements(); pushState(); 
+            currentUser.lastSeen = ts; saveLocalUserLastSeen(); renderActivityBox(); refreshMapVisuals(); checkAchievements(); pushState();
         };
 
         async function checkAndRunReplay() {
@@ -1375,7 +1558,7 @@
                 if (!tokensState[t.gemId]) tokensState[t.gemId] = {};
                 tokensState[t.gemId][t.playerId] = (tokensState[t.gemId][t.playerId] || 0) + 1;
                 calculateGameState(); renderActivityBox(t.timestamp); refreshMapVisuals();
-                let target = Object.values(gemeindeGeoJsonLayer._layers).find(l => getGemeindeId(l.feature) === t.gemId);
+                const target = gemLayerMap.get(t.gemId);
                 if (target) { 
                     map.flyToBounds(target.getBounds(), { maxZoom: 10, duration: 0.6 }); await new Promise(r => setTimeout(r, 650)); 
                     updateGemeindeLabel(target, true, getUser(t.playerId).color); 
@@ -1385,7 +1568,8 @@
             }
             isReplaying = false; replayOverlay.classList.add('hidden');
             if (latestServerData) applyServerData(latestServerData);
-            currentUser.lastSeen = Date.now(); saveLocalUserLastSeen(); pushState(); 
+            checkAchievements();
+            currentUser.lastSeen = Date.now(); saveLocalUserLastSeen(); pushState();
         }
 
         // ==========================================
@@ -1395,8 +1579,8 @@
             e.preventDefault(); const raw = loginInput.value.trim(), uid = raw.toLowerCase().replace(/[^a-z0-9]/g, ''); 
             if(!uid) return;
             if(!registeredUsers[uid]) { 
-                const cid = Object.keys(registeredUsers).filter(p => registeredUsers[p]).length % PALETTE.length;
-                registeredUsers[uid] = { id: uid, name: raw, color: PALETTE[cid], lastSeen: Date.now(), hasSeenUndoHint: false, registeredAt: Date.now(), highestRank: null };
+                const cid = Object.keys(registeredUsers).filter(p => registeredUsers[p]).length % STANDARD_COLORS.length;
+                registeredUsers[uid] = { id: uid, name: raw, color: STANDARD_COLORS[cid], lastSeen: Date.now(), hasSeenUndoHint: false, registeredAt: Date.now(), highestRank: null };
                 pushState();
             }
             localStorage.setItem('bierisko_username', raw); currentUser = registeredUsers[uid]; updateLocalUserLastSeen(); updateUIForUser();
@@ -1468,13 +1652,31 @@
             checkAndRunReplay(); 
         });
 
-        btnDelete.addEventListener('click', () => { 
+        btnDelete.addEventListener('click', async () => { 
             if(confirm(`Are you sure you want to delete data for ${currentUser.name}?`)) { 
-                const idToDelete = currentUser.id; registeredUsers[idToDelete] = null; 
+                const idToDelete = currentUser.id; 
+                
+                // Securely backup data to an archive document before wiping from the live map
+                try {
+                    const archiveRef = doc(db_fb, 'bierisko_game', 'deleted_users_archive');
+                    await setDoc(archiveRef, {
+                        [`${idToDelete}_${Date.now()}`]: {
+                            profile: registeredUsers[idToDelete],
+                            history: tokenHistory.filter(log => log.playerId === idToDelete),
+                            activity: activityLog.filter(log => log.playerId === idToDelete),
+                            deletedAt: Date.now()
+                        }
+                    }, { merge: true });
+                } catch(e) { console.error("Archive failed", e); }
+
+                // Erase from live state so username is freed up
+                registeredUsers[idToDelete] = null; 
                 tokenHistory = tokenHistory.filter(log => log.playerId !== idToDelete); 
                 rebuildTokensFromHistory();
                 activityLog = activityLog.filter(log => log.playerId !== idToDelete && log.type !== 'system'); 
-                pushState(); btnLogout.click(); 
+                
+                pushState(); 
+                btnLogout.click(); 
             } 
         });
 
