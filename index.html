@@ -1294,16 +1294,26 @@
         // ==========================================
         // 8. SURGICAL FIREBASE SYNC ENGINE
         // ==========================================
+        // const firebaseConfig = {
+            // apiKey: "AIzaSyCfzl0RKiF0Yy8XXAZ0O20TEmDV5gogh9I",
+            // authDomain: "bierisko.firebaseapp.com",
+            // databaseURL: "https://bierisko-default-rtdb.europe-west1.firebasedatabase.app",
+            // projectId: "bierisko",
+            // storageBucket: "bierisko.firebasestorage.app",
+            // messagingSenderId: "291287462170",
+            // appId: "1:291287462170:web:f209563d49b3fc0d93bca3",
+            // measurementId: "G-BSG6YYVGJW"
+        //};
+        
         const firebaseConfig = {
-            apiKey: "AIzaSyCfzl0RKiF0Yy8XXAZ0O20TEmDV5gogh9I",
-            authDomain: "bierisko.firebaseapp.com",
-            databaseURL: "https://bierisko-default-rtdb.europe-west1.firebasedatabase.app",
-            projectId: "bierisko",
-            storageBucket: "bierisko.firebasestorage.app",
-            messagingSenderId: "291287462170",
-            appId: "1:291287462170:web:f209563d49b3fc0d93bca3",
-            measurementId: "G-BSG6YYVGJW"
+          apiKey: "AIzaSyDmz511LfKVe2SOqG2UDhXYpatnKm_Zqaw",
+          authDomain: "bierisko-dev.firebaseapp.com",
+          projectId: "bierisko-dev",
+          storageBucket: "bierisko-dev.firebasestorage.app",
+          messagingSenderId: "710022039662",
+          appId: "1:710022039662:web:132b5971c9c26f102d7e7f"
         };
+        
         const app_fb = initializeApp(firebaseConfig);
         const auth_fb = getAuth(app_fb);
         const db_fb = getFirestore(app_fb);
