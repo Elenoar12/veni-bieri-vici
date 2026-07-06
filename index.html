@@ -107,6 +107,9 @@
 
     <!-- UI Overlay: Top Controls -->
     <div class="absolute top-4 left-4 sm:left-6 sm:top-6 z-[2000] flex flex-col gap-2 pointer-events-none">
+        <button id="btn-groups" class="bg-white/90 backdrop-blur-md flex items-center justify-center rounded-full shadow-lg border border-emerald-200 text-emerald-600 hover:text-emerald-700 hover:scale-105 transition-all pointer-events-auto active:scale-95 flex-none w-12 h-12 min-w-[3rem] min-h-[3rem] aspect-square" title="Groups">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </button>
         <button id="btn-achievements" class="bg-white/90 backdrop-blur-md flex items-center justify-center rounded-full shadow-lg border border-amber-200 text-amber-500 hover:text-amber-600 hover:scale-105 transition-all pointer-events-auto active:scale-95 flex-none w-12 h-12 min-w-[3rem] min-h-[3rem] aspect-square" title="Achievements">
             <span class="text-xl leading-none">🏆</span>
         </button>
@@ -181,6 +184,48 @@
                     </div>
                 </div>
                 <button id="btn-delete" class="w-full py-3 text-sm font-bold text-red-500 bg-red-50 border border-red-200 rounded-xl uppercase tracking-wide">Delete Account</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- UI Overlay: Groups Modal -->
+    <div id="groups-modal" class="hidden absolute inset-0 z-[4000] bg-slate-900/40 backdrop-blur-sm flex items-center justify-center px-4 transition-opacity">
+        <div class="bg-white rounded-2xl shadow-2xl p-6 max-w-sm w-full max-h-[90vh] overflow-y-auto custom-scrollbar transform transition-all relative text-center">
+            <button id="btn-close-groups" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+            <h3 class="text-xl font-bold text-slate-800 mb-2 uppercase tracking-tight">Groups</h3>
+            <p class="text-xs text-slate-500 mb-5">Play in your own group with friends. Your beers count everywhere you're a member.</p>
+
+            <div id="groups-list" class="flex flex-col gap-2 mb-5 text-left">
+                <!-- Rendered via JS -->
+            </div>
+
+            <!-- Create Group -->
+            <div class="mb-4 bg-slate-50 p-4 rounded-xl border border-slate-200 text-left">
+                <button id="btn-toggle-create-group" class="w-full flex items-center justify-between text-xs font-black text-slate-800 uppercase tracking-widest">
+                    <span>Create a Group</span>
+                    <svg id="icon-create-group-toggle" class="text-slate-400 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <form id="create-group-form" class="hidden flex-col gap-2 mt-3">
+                    <input type="text" id="create-group-input" placeholder="Group name" required autocomplete="off"
+                           class="w-full bg-white border border-slate-300 text-slate-800 px-3 py-2.5 rounded-lg focus:outline-none focus:border-emerald-500 transition-all font-semibold text-sm placeholder:font-normal placeholder:text-slate-400">
+                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-4 rounded-lg transition-colors shadow-md shadow-emerald-600/30 text-sm uppercase tracking-wide">
+                        Create
+                    </button>
+                </form>
+            </div>
+
+            <!-- Join Group -->
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-left">
+                <h4 class="text-xs font-black text-slate-800 uppercase tracking-widest mb-3">Join a Group</h4>
+                <form id="join-group-form" class="flex gap-2">
+                    <input type="text" id="join-group-input" placeholder="Invite code" required autocomplete="off"
+                           class="flex-1 min-w-0 bg-white border border-slate-300 text-slate-800 px-3 py-2.5 rounded-lg focus:outline-none focus:border-emerald-500 transition-all font-semibold text-sm placeholder:font-normal placeholder:text-slate-400">
+                    <button type="submit" class="shrink-0 bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 px-4 rounded-lg transition-colors text-sm uppercase tracking-wide">
+                        Join
+                    </button>
+                </form>
             </div>
         </div>
     </div>
@@ -362,7 +407,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // ==========================================
         // 0. VERSION CACHE CONTROLLER
@@ -436,6 +481,16 @@
         const settingsModal = document.getElementById('settings-modal');
         const btnSettings = document.getElementById('btn-settings');
         const btnCloseSettings = document.getElementById('btn-close-settings');
+        const groupsModal = document.getElementById('groups-modal');
+        const btnGroups = document.getElementById('btn-groups');
+        const btnCloseGroups = document.getElementById('btn-close-groups');
+        const groupsList = document.getElementById('groups-list');
+        const btnToggleCreateGroup = document.getElementById('btn-toggle-create-group');
+        const iconCreateGroupToggle = document.getElementById('icon-create-group-toggle');
+        const createGroupForm = document.getElementById('create-group-form');
+        const createGroupInput = document.getElementById('create-group-input');
+        const joinGroupForm = document.getElementById('join-group-form');
+        const joinGroupInput = document.getElementById('join-group-input');
         const profileName = document.getElementById('profile-name');
         const profileColor = document.getElementById('profile-color');
         const colorPickerGrid = document.getElementById('color-picker-grid');
@@ -1256,6 +1311,114 @@
         // ==========================================
 
         // ==========================================
+        // --- START GROUPS MODULE JS (Phase 1: UI shell, local-only placeholder state) ---
+        // ==========================================
+        let placeholderGroups = [ { id: 'default', name: 'Veni Bieri Vici', code: null, active: true } ];
+
+        function generatePlaceholderCode() {
+            return Math.random().toString(36).substring(2, 8).toUpperCase();
+        }
+
+        function renderGroupsList() {
+            groupsList.innerHTML = '';
+            placeholderGroups.forEach(g => {
+                const row = document.createElement('div');
+                row.className = `flex items-center justify-between gap-2 p-3 rounded-xl border transition-colors ${g.active ? 'bg-emerald-50 border-emerald-200' : 'bg-slate-50 border-slate-200 hover:bg-slate-100 cursor-pointer'}`;
+                if (!g.active) row.onclick = () => window.switchPlaceholderGroup(g.id);
+
+                let codeHtml = '';
+                if (g.code) {
+                    codeHtml = `<div class="flex items-center gap-1.5 mt-1">
+                        <code class="text-[10px] font-mono bg-white border border-slate-200 rounded px-1.5 py-0.5 text-slate-500">${g.code}</code>
+                        <button onclick="event.stopPropagation(); window.copyGroupCode('${g.code}')" class="text-[10px] text-emerald-600 font-bold hover:text-emerald-700">Copy Invite</button>
+                    </div>`;
+                }
+                const leaveBtnHtml = g.id !== 'default' ? `<button onclick="event.stopPropagation(); window.leaveGroup('${g.id}')" title="Leave group" class="shrink-0 text-slate-400 hover:text-red-500 transition-colors p-1.5 rounded-lg hover:bg-red-50">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                </button>` : '';
+                row.innerHTML = `<div class="min-w-0">
+                    <div class="flex items-center gap-2">
+                        <span class="font-bold text-sm text-slate-800 truncate">${g.name}</span>
+                        ${g.active ? '<span class="shrink-0 text-[9px] font-black text-emerald-600 uppercase tracking-widest bg-emerald-100 px-1.5 py-0.5 rounded-full">Active</span>' : ''}
+                    </div>
+                    ${codeHtml}
+                </div>
+                ${leaveBtnHtml}`;
+                groupsList.appendChild(row);
+            });
+        }
+
+        window.switchPlaceholderGroup = function(id) {
+            placeholderGroups.forEach(g => g.active = (g.id === id));
+            renderGroupsList();
+            const g = placeholderGroups.find(g => g.id === id);
+            if (g) showToast(`Switched to "${g.name}"`);
+        };
+
+        window.leaveGroup = function(id) {
+            const g = placeholderGroups.find(g => g.id === id);
+            if (!g) return;
+            if (!confirm(`Leave "${g.name}"? You'll need the invite code to rejoin.`)) return;
+            const wasActive = g.active;
+            placeholderGroups = placeholderGroups.filter(x => x.id !== id);
+            if (wasActive) {
+                const fallback = placeholderGroups.find(x => x.id === 'default') || placeholderGroups[0];
+                if (fallback) fallback.active = true;
+            }
+            renderGroupsList();
+            showToast(`Left "${g.name}"`);
+        };
+
+        window.copyGroupCode = function(code) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(code).then(() => showToast('Invite code copied!')).catch(() => showToast('Could not copy code', true));
+            } else {
+                showToast('Invite code: ' + code);
+            }
+        };
+
+        btnGroups.addEventListener('click', () => {
+            renderGroupsList();
+            groupsModal.classList.remove('hidden');
+        });
+        btnCloseGroups.addEventListener('click', () => {
+            groupsModal.classList.add('hidden');
+            createGroupForm.classList.add('hidden'); createGroupForm.classList.remove('flex');
+            iconCreateGroupToggle.style.transform = 'rotate(0deg)';
+        });
+
+        btnToggleCreateGroup.addEventListener('click', () => {
+            const isHidden = createGroupForm.classList.contains('hidden');
+            createGroupForm.classList.toggle('hidden', !isHidden);
+            createGroupForm.classList.toggle('flex', isHidden);
+            iconCreateGroupToggle.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+        });
+
+        createGroupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = createGroupInput.value.trim();
+            if (!name) return;
+            placeholderGroups.forEach(g => g.active = false);
+            placeholderGroups.push({ id: 'grp_' + Date.now(), name, code: generatePlaceholderCode(), active: true });
+            createGroupInput.value = '';
+            createGroupForm.classList.add('hidden'); createGroupForm.classList.remove('flex');
+            iconCreateGroupToggle.style.transform = 'rotate(0deg)';
+            renderGroupsList();
+            showToast(`Group "${name}" created!`);
+        });
+
+        joinGroupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const code = joinGroupInput.value.trim();
+            if (!code) return;
+            joinGroupInput.value = '';
+            showToast('Joining groups is coming soon!');
+        });
+        // ==========================================
+        // --- END GROUPS MODULE JS ---
+        // ==========================================
+
+        // ==========================================
         // 7. GAME LOGIC ENGINE
         // ==========================================
         function calculateGameState() {
@@ -1317,33 +1480,61 @@
         const app_fb = initializeApp(firebaseConfig);
         const auth_fb = getAuth(app_fb);
         const db_fb = getFirestore(app_fb);
-        const stateRef = doc(db_fb, 'bierisko_game', 'global_state');
+        const stateRef = doc(db_fb, 'groups', 'default');
+        const legacyStateRef = doc(db_fb, 'bierisko_game', 'global_state'); // pre-groups data, read once for migration only
+
+        // One-time, idempotent migration of the old single shared game into the new groups/default doc shape.
+        // Leaves the legacy doc untouched as a rollback fallback.
+        async function migrateLegacyStateToDefaultGroup() {
+            try {
+                const existing = await getDoc(stateRef);
+                if (existing.exists()) return; // already migrated
+
+                const legacySnap = await getDoc(legacyStateRef);
+                if (!legacySnap.exists()) return; // fresh install, nothing to migrate
+
+                const legacy = legacySnap.data();
+                const members = {};
+                Object.keys(legacy.users || {}).forEach(uid => {
+                    const u = legacy.users[uid];
+                    if (!u) return; // skip deleted-account tombstones
+                    members[uid] = { ...u, joinedAt: u.registeredAt || 0 };
+                });
+
+                await setDoc(stateRef, {
+                    id: 'default', name: 'Veni Bieri Vici', isDefault: true, createdAt: Date.now(),
+                    members,
+                    tokenHistory: legacy.tokenHistory || [],
+                    activityLog: legacy.activityLog || []
+                });
+            } catch(e) { console.error("Migration error", e); }
+        }
 
         async function pushState() {
             if (!isFirebaseReady || !isInitialDataLoaded || !currentUser) return;
-            
+
             let myTokens = {};
             for (let gem in tokensState) {
                 if (tokensState[gem][currentUser.id] !== undefined) {
                     myTokens[gem] = { [currentUser.id]: tokensState[gem][currentUser.id] };
                 }
             }
-            
+
             let myUser = { [currentUser.id]: registeredUsers[currentUser.id] };
 
-            try { 
-                await setDoc(stateRef, { 
-                    users: myUser, 
-                    tokens: myTokens, 
-                    activityLog: activityLog.slice(-1000), 
-                    tokenHistory: tokenHistory.slice(-5000) 
-                }, { merge: true }); 
-            } 
+            try {
+                await setDoc(stateRef, {
+                    members: myUser,
+                    tokens: myTokens,
+                    activityLog: activityLog.slice(-1000),
+                    tokenHistory: tokenHistory.slice(-5000)
+                }, { merge: true });
+            }
             catch(e) { console.error("Cloud error", e); }
         }
 
         function applyServerData(data) {
-            registeredUsers = data.users || {};
+            registeredUsers = data.members || {};
             activityLog = (data.activityLog || []).filter(log => log.type !== 'system');
             tokenHistory = data.tokenHistory || [];
             _vpCache = null;
@@ -1370,7 +1561,7 @@
                     latestServerData = docSnap.data();
                     if (!isReplaying) applyServerData(latestServerData);
                     unlockUIAndAutoLogin();
-                    if (currentUser && !latestServerData.users?.[currentUser.id]) btnLogout.click();
+                    if (currentUser && !latestServerData.members?.[currentUser.id]) btnLogout.click();
                 } else {
                     isInitialDataLoaded = true; dbStatus.innerText = "Cloud ready ✓";
                     loginInput.disabled = false; btnLoginSubmit.disabled = false; pushState();
@@ -1380,7 +1571,13 @@
 
         async function initFirebase() {
             await signInAnonymously(auth_fb);
-            onAuthStateChanged(auth_fb, user => { if (user && !isFirebaseReady) { isFirebaseReady = true; listenToLiveState(); } });
+            onAuthStateChanged(auth_fb, async user => {
+                if (user && !isFirebaseReady) {
+                    isFirebaseReady = true;
+                    await migrateLegacyStateToDefaultGroup();
+                    listenToLiveState();
+                }
+            });
         }
 
         // ==========================================
